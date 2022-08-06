@@ -1,0 +1,157 @@
+m-other-event-card {
+    border: 1px solid transparent;
+    border-bottom: 1px solid #d2d9e7!important;
+    border-radius: 0;
+}
+* {
+    box-sizing: border-box;
+    font-family: Open Sans,serif;
+    background: 0 0;
+    letter-spacing: 0;
+    color: #4a4a4a;
+    outline: 0;
+}
+.l-card-3 {
+    font-family: Lato,sans-serif;
+    min-height: 160px;
+    padding: 32px;
+    background: #fff;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    border-radius: 4px;
+    border: 1px solid #b3bdd2;
+}
+l-card-3 .l-card-3__col-1 {
+    width: 110px;
+    padding-right: 30px;
+    margin-right: 30px;
+    border-right: 2px solid #fd7d6f;
+}
+l-card-3 .l-card-3__col-1 .l-card-3__date-1 {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: center;
+    align-items: center;
+    max-width: 80px;
+    width: 100%;
+}
+p {
+    margin: 0;
+    padding: 0;
+}
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.l-card-3 .l-card-3__col-1 .m-card-3__day {
+    font-family: Lato,sans-serif;
+    font-size: 28px;
+    line-height: 28px;
+    text-align: center;
+    font-weight: 400;
+    color: #484d5c;
+    margin-bottom: 8px;
+}
+.l-card-3 .l-card-3__col-1 .m-card-3__day {
+    font-family: Lato,sans-serif;
+    font-size: 28px;
+    line-height: 28px;
+    text-align: center;
+    font-weight: 400;
+    color: #484d5c;
+    margin-bottom: 8px;
+}
+@media (max-width: 900px){
+.l-card-3__col-2 {
+    margin-right: 0;
+    max-width: 75%;
+}
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+.l-card-3__col-2 .l-card-3__info .m-card-3__head {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 22px;
+    text-transform: capitalize;
+    color: #484d5c;
+    margin-bottom: 16px;
+}
+h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+.m-next-event-card .m-card-3__desc, .m-other-event-card .m-card-3__desc {
+    display: -ms-flexbox;
+    display: flex;
+}
+.m-next-event-card .m-card-3__desc .m-card-3__desc-type, .m-other-event-card .m-card-3__desc .m-card-3__desc-type {
+    margin-right: 12px;
+}
+i-clock-grey {
+    display: inline-block;
+    background: url(https://cdn.codechef.com/images/icons/clock-icon.svg);
+    width: 16px;
+    height: 16px;
+}
+.l-margin-right-8 {
+    margin-right: 8px!important;
+}
+.l-card-3__col-3 {
+    width: 185px;
+    -ms-flex-item-align: end;
+    align-self: flex-end;
+}
+@media (max-width: 900px){
+.l-card-3__col-3 {
+    margin-top: 40px;
+    -ms-flex-item-align: unset;
+    -ms-grid-row-align: unset;
+    align-self: unset;
+}
+}
+.l-card-3__col-3 .l-card-3__dtl-btn {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: end;
+    align-items: flex-end;
+}
+.l-card-3__col-3 .l-card-3__dtl-btn .m-card-3__dtl-btn {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 42px;
+    white-space: nowrap;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #4b7abd;
+    border: 1px solid #4b7abd;
+    text-align: center;
+    border-radius: 2px;
+    width: 100%;
+    transition: border,background,box-shadow,color .5s;
+}
+.m-next-event-card .m-card-3__dtl-btn, .m-other-event-card .m-card-3__dtl-btn {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+a {
+    text-decoration: none;
+    cursor: pointer;
+}

@@ -1,7 +1,8 @@
 import { Button } from "antd";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.less";
-import "antd/dist/antd.css";
+// import "antd/dist/antd.min.css"
+import 'antd/dist/antd.css'
 import Header from "../src/Components/Header/Header";
 import Instructions from "./Pages/Instructions/Instructions";
 import Questions from "./Pages/Questions/Questions";
@@ -9,6 +10,11 @@ import Home from "./Pages/Home/Home";
 import Login from "./Pages/LoginSignup/Login";
 import { connect } from "react-redux";
 import { login } from "./store/actions";
+import Contest from "./Pages/Contest/Contest"
+
+ 
+
+
 
 function App(props) {
   return (
@@ -21,9 +27,10 @@ function App(props) {
         ></Route>
         <Route path="/contests/:id/solve" element={<Questions />}></Route>
         <Route path="/contests/:id"></Route>
-        <Route path="/contests" element={<Home />}></Route>
+        <Route path="/contests" element={<Contest />}></Route>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />}></Route>
+        
       </Routes>
     </div>
   );

@@ -14,3 +14,6 @@ export const getUserByToken = (token) => {
     });
 };
 
+export const getContest =()=>{
+  return backend.get("/contest/")
+}

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import "tailwindcss/tailwind.css"
+
 // import * as Yup from "yup";
 // import { Validators } from "../../Utils/Index";
 import { connect } from "react-redux";
