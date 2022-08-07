@@ -1,12 +1,26 @@
 import { Button, Layout, List, Typography } from "antd";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
+import { useState } from "react";
 const { Header, Footer, Sider, Content } = Layout;
+
 
 const data = [];
 
 const Instructions = () => {
   const { id } = useParams();
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  // useEffect(()=>{
+  //     setLoading(true);
+  //     getInstructions()
+  //     .then((res)=>{
+  //         setData(res);
+  //         setLoading(false);
+  //     })
+  //     .catch((error)=>{})
+
+  // },[]);
   return (
     <>
       <Layout
@@ -24,7 +38,7 @@ const Instructions = () => {
             ))}
           </ol>
           <Footer>
-            <Link to="/contests/123/solve">
+            <Link to="/contests/:id/solve">
               <Button type="primary" size="large">
                 next
               </Button>

@@ -1,5 +1,4 @@
-import { Button } from "antd";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "./App.less";
 // import "antd/dist/antd.min.css"
 import "antd/dist/antd.css";
@@ -33,7 +32,7 @@ function App(props) {
             element={<Instructions />}
           ></Route>
           <Route path="/contests/:id/solve" element={<Questions />}></Route>
-          <Route path="/contests/:id"></Route>
+    
           <Route path="/contests" element={<Contest />}></Route>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />}></Route>

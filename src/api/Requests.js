@@ -17,3 +17,9 @@ export const getUserByToken = (token) => {
 export const getContest =()=>{
   return backend.get("/contest/")
 }
+export const getInstructions =() =>{
+  return backend.get("/instruction/id")
+}
+export const getQuestions =() =>{
+  return backend.get("/")
+}
