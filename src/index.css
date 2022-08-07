@@ -3,21 +3,26 @@
 @import "tailwindcss/utilities";
 
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 .app {
   background: url(https://cdn.wallpapersafari.com/21/8/M7fdoJ.jpg);
-  /* background: url(https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NHwxMTkzOTE0fHxlbnwwfHx8fA%3D%3D&w=1000&q=80);
-  background: url(https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg); */
-
+  /* background: url(https://img.freepik.com/free-vector/stream-binary-code-design_53876-118383.jpg?w=1380&t=st=1659892943~exp=1659893543~hmac=73234c29734db80bc8757530657b7c0ec220c1feb7ba070721d62a55b0b31114); */
+  background: linear-gradient(#7f8c8d, #000000);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
+  font-family: "Quicksand", sans-serif;
+  overflow: auto;
 }
 
 .app .overlay {
   height: 100vh;
   position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: auto;
   width: 100%;
   background: radial-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5));
 }
