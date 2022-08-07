@@ -1,33 +1,32 @@
 import React, { useState } from "react";
-import "tailwindcss/tailwind.css"
+import "tailwindcss/tailwind.css";
 
-// import * as Yup from "yup";
-// import { Validators } from "../../Utils/Index";
+import * as Yup from "yup";
+import { Validators } from "../../utils";
 import { connect } from "react-redux";
 import { login } from "../../api/Requests";
-import { Link } from "react-router-dom";
-import { Formik,Field } from "formik";
+import { Formik, Field } from "formik";
 const Login = (props) => {
   const [error, setError] = useState(null);
 
-//   const validate = Yup.object({
-//     email: Validators.emailRequired,
-//     password: Validators.stringRequired,
-//   });
+  const validate = Yup.object({
+    email: Validators.emailRequired,
+    password: Validators.stringRequired,
+  });
 
   return (
-    <div>
-       <Formik
+    <div className=" w-96 mx-auto bg-gray-100 p-4 py-8">
+      <Formik
         initialValues={{
           email: "",
           password: "",
         }}
-      
+        validationSchema={validate}
         onSubmit={async (values) => {
           setError(null);
           login(values)
             .then((res) => {
-              localStorage.setItem("xeniaverse", res.data.token);
+              localStorage.setItem("xenia-mcq", res.data.token);
               props.login(res.data);
               props.closeModal();
             })
@@ -41,7 +40,7 @@ const Login = (props) => {
             <h1 className="text-2xl font-bold text-center">Sign In</h1>
             <div className="">
               <Field
-                className="w-full rounded border bg-gray-100 border-gray-200 p-2"
+                className="w-full rounded border bg-white border-gray-200 p-2"
                 placeholder={"Email"}
                 name={"email"}
                 type={"text"}
@@ -55,7 +54,7 @@ const Login = (props) => {
             </div>
             <div className="">
               <Field
-                className="w-full rounded border bg-gray-100 border-gray-200 p-2"
+                className="w-full rounded border bg-white border-gray-200 p-2"
                 placeholder={"Password"}
                 name={"password"}
                 type={"password"}
@@ -69,30 +68,14 @@ const Login = (props) => {
             </div>
             <div className="flex items-baseline justify-between">
               <button
-                className="px-6 py-2 text-white bg-purple-600 rounded-lg hover:bg-purple-800"
+                className="px-6 py-2 text-white bg-cyan-500 rounded-lg hover:bg-cyan-800"
                 type="button"
                 onClick={formik.handleSubmit}
               >
                 Login
               </button>
-              <Link
-                class="text-medium text-blue-600 hover:underline"
-                to="/forgotpassword"
-                onClick={props.closeModal}
-              >
-                Forgot Password ?
-              </Link>
             </div>
             {error && <div className="text-red-500 font-bold">{error}</div>}
-            <p className="link">
-              <div> Don't have an account?</div>
-              <div
-                className="font-bold cursor-pointer text-white"
-                onClick={props.toggle}
-              >
-                Create Account
-              </div>
-            </p>
           </div>
         )}
       </Formik>
@@ -110,5 +93,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
- export default connect(mapStateToProps, mapDispatchToProps)(Login);
-
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
