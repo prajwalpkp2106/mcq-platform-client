@@ -52,10 +52,6 @@ const Contest = () => {
           {Data.map((contest) => {
             return (
               <Card
-                style={{
-                  border: "1px solid black",
-                }}
-                className=" w-80 md:w-[400px] bg-black/20 inline-block text-white mx-auto"
                 title={
                   <div className="text-white">
                     <div className="w-full">
@@ -67,6 +63,13 @@ const Contest = () => {
                     <div className=" font-bolds tracking-wider">Title</div>
                   </div>
                 }
+                bodyStyle={{
+                  background: "rgb(0,0,0,0.5)",
+                }}
+                headStyle={{
+                  background: "rgb(50, 50, 50, 0.2)",
+                }}
+                className=" w-80 md:w-[400px] bg-black/20 inline-block text-white mx-auto border-none shadow-cyan-300"
               >
                 <div className="space-y-4">
                   <div className="">
