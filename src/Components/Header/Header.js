@@ -1,56 +1,138 @@
-import { AppstoreOutlined, MailOutlined, SettingOutlined,UserOutlined,DownOutlined } from '@ant-design/icons';
-import { Menu ,Avatar, Image,Dropdown, message, Space} from 'antd';
-import { Link } from 'react-router-dom';
-import styles from './Header.css'
-import userMenu from "../Menu/Menu"
-const onClick = ({ key }) => {
-  message.info(`Click on item ${key}`);
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { connect } from "react-redux";
+import { login, logout } from "../../store/actions";
+
+const Header = (props) => {
+  const [navbarOpen, setNavbarOpen] = useState(false);
+
+  function logout() {
+    props.logout();
+    toast.success("Logged Out Successfully");
+    localStorage.clear();
+  }
+
+  return (
+    <nav
+      className={
+        "text-white relative shadow-lg bg-gradient-to-r from-slate-800 via-gray-800 to-gray-900 flex flex-wrap items-center justify-between px-2 py-3 z-50"
+      }
+    >
+      <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
+        <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+          {props.isAuthenticated && (
+            <div className=" font-bold text-2xl flex items-center text-gray-300">
+              <img
+                src={
+                  "https://icons.veryicon.com/png/o/business/multi-color-financial-and-business-icons/user-139.png"
+                }
+                className="h-8 md:h-10 w-auto"
+              ></img>
+              <div className=" px-2">{props?.userData?.name}</div>
+            </div>
+          )}
+          <button
+            className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+            type="button"
+            onClick={() => setNavbarOpen(!navbarOpen)}
+          >
+            <i
+              className={
+                (props.transparent ? "text-white" : "text-gray-50") +
+                " fas fa-bars"
+              }
+            ></i>
+          </button>
+        </div>
+        <div
+          className={
+            "lg:flex flex-grow items-center  lg:bg-transparent lg:shadow-none" +
+            (navbarOpen ? " block rounded " : " hidden")
+          }
+          id="example-navbar-warning"
+        >
+          {props.isAuthenticated ? (
+            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+              <li className="nav-item">
+                <Link
+                  to={`/`}
+                  onClick={() => setNavbarOpen(!navbarOpen)}
+                  className={
+                    (props.transparent
+                      ? "lg:text-white lg:hover:text-gray-100 text-gray-50"
+                      : "text-gray-50 hover:text-gray-100") +
+                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold hover:text-cyan-300"
+                  }
+                >
+                  <span className="hide-sm">Home</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to={`/contests`}
+                  onClick={() => setNavbarOpen(!navbarOpen)}
+                  className={
+                    (props.transparent
+                      ? "lg:text-white lg:hover:text-gray-100 text-gray-50"
+                      : "text-gray-50 hover:text-gray-100") +
+                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold hover:text-cyan-300"
+                  }
+                >
+                  <span className="hide-sm">DashBoard</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  onClick={logout}
+                  to="/"
+                  replace
+                  className={
+                    (props.transparent
+                      ? "lg:text-white lg:hover:text-gray-100 text-gray-50"
+                      : "text-gray-50 hover:text-gray-100") +
+                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold hover:text-cyan-300"
+                  }
+                >
+                  <i className="fas fa-sign-out-alt"></i>
+                  <span className="hide-sm"> &nbsp;Logout</span>
+                </Link>
+              </li>
+            </ul>
+          ) : (
+            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+              <li className="nav-item">
+                <Link
+                  to="/login"
+                  className={
+                    (props.transparent
+                      ? "lg:text-white lg:hover:text-gray-100 text-gray-50"
+                      : "text-gray-50 hover:text-gray-100") +
+                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold hover:text-cyan-300"
+                  }
+                >
+                  Login
+                </Link>
+              </li>
+            </ul>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
 };
-const menu = (
-  <Menu
-    onClick={onClick}
-    items={[
-      {
-        label: 'Profile',
-        key: '1',
-      },
-      {
-        label: 'Log out',
-        key: '2',
-      },
-     
-    ]}
-  />
-);
-const Header = () => (
-  <>
 
+function mapStateToProps(state) {
+  return {
+    isAuthenticated: state.isAuthenticated,
+    userData: state.userData,
+  };
+}
+function mapActionToProps(dispatch) {
+  return {
+    login: () => dispatch(login()),
+    logout: () => dispatch(logout()),
+  };
+}
 
-<nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
-  <div class="container flex flex-wrap justify-between items-center mx-auto">
-   
-    <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
-      <span class="sr-only">Open main menu</span>
-      <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-    </button>
-    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-      <ul class="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-        <li>
-          <a href="#" class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Home</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"></a>
-        </li>
-       
-      </ul>
-    </div>
-  </div>
-</nav>
-</>
-
-);
-
-export default Header;
+export default connect(mapStateToProps, mapActionToProps)(Header);

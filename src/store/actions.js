@@ -9,9 +9,6 @@ export const login = (userData) => {
 	};
 }
 
-
-// Logout / Clear Profile
-
 export const logout = () => {
 	return { type: LOGOUT };
 };

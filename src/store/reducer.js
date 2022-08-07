@@ -2,7 +2,7 @@ import { LOGIN, LOGOUT, USERSUBMISSION } from "./actions";
 
 const initialState = {
   token: localStorage.getItem("usertoken"),
-  isAuthenticated: false,
+  isAuthenticated: true,
   userData: {},
 };
 

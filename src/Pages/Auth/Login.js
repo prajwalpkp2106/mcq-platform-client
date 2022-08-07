@@ -4,8 +4,10 @@ import "tailwindcss/tailwind.css";
 import * as Yup from "yup";
 import { Validators } from "../../utils";
 import { connect } from "react-redux";
-import { login } from "../../api/Requests";
+import * as Requests from "../../api/Requests";
 import { Formik, Field } from "formik";
+import { login } from "../../store/actions";
+import { Navigate } from "react-router-dom";
 const Login = (props) => {
   const [error, setError] = useState(null);
 
@@ -14,7 +16,9 @@ const Login = (props) => {
     password: Validators.stringRequired,
   });
 
-  return (
+  return props.isAuthenticated ? (
+    <Navigate to={"/"}></Navigate>
+  ) : (
     <div className=" w-96 mx-auto bg-gray-100 p-4 py-8 my-10">
       <Formik
         initialValues={{
@@ -24,7 +28,7 @@ const Login = (props) => {
         validationSchema={validate}
         onSubmit={async (values) => {
           setError(null);
-          login(values)
+          Requests.login(values)
             .then((res) => {
               localStorage.setItem("xenia-mcq", res.data.token);
               props.login(res.data);
@@ -80,7 +84,9 @@ const Login = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    isAuthenticated: state.isAuthenticated,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
