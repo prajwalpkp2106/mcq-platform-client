@@ -4,7 +4,7 @@ import "../Contest/Contest.css";
 export default function Home() {
   return (
     <div className="h-full flex justify-center absolute top-0 left-0 text-center w-full p-4">
-      <div className="h-[80%] bg-slate-200/10 text-center flex flex-col backdrop-blur-sm justify-center w-full m-auto space-y-4 bg-gradient-to-b from-gray-400/20 to-gray-500/20">
+      <div className="h-[80%] bg-black/40 text-center flex flex-col backdrop-blur-sm justify-center w-full m-auto space-y-4 bg-gradient-to-b from-gray-400/20 to-gray-500/20">
         <div>
           <img
             className=" w-80 md:w-[300px] mx-auto"

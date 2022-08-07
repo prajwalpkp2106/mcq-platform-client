@@ -53,23 +53,25 @@ const Contest = () => {
             return (
               <Card
                 title={
-                  <div className="text-white">
+                  <div className="">
                     <div className="w-full">
                       <img
                         className="h-[150px] mx-auto my-2"
                         src={contest.image}
                       ></img>
                     </div>
-                    <div className=" font-bolds tracking-wider">Title</div>
+                    <div className=" font-bolds tracking-wider text-lg">
+                      Title
+                    </div>
                   </div>
                 }
-                bodyStyle={{
-                  background: "rgb(0,0,0,0.5)",
-                }}
-                headStyle={{
-                  background: "rgb(50, 50, 50, 0.2)",
-                }}
-                className=" w-80 md:w-[400px] bg-black/20 inline-block text-white mx-auto border-none shadow-cyan-300"
+                // bodyStyle={{
+                //   background: "rgb(0,0,0,0.5)",
+                // }}
+                // headStyle={{
+                //   background: "rgb(50, 50, 50, 0.2)",
+                // }}
+                className=" w-80 md:w-[400px] bg-white inline-block text-black mx-auto border-none shadow-cyan-300"
               >
                 <div className="space-y-4">
                   <div className="">
@@ -80,7 +82,7 @@ const Contest = () => {
                   <Link to={`/contest/${contest._id}`}>
                     <Button
                       type="primary"
-                      className=" float-right border-white"
+                      className=" float-right border-black text-black"
                     >
                       Detail
                     </Button>
