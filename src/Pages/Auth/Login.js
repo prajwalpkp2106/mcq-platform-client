@@ -15,7 +15,7 @@ const Login = (props) => {
   });
 
   return (
-    <div className=" w-96 mx-auto bg-gray-100 p-4 py-8">
+    <div className=" w-96 mx-auto bg-gray-100 p-4 py-8 my-10">
       <Formik
         initialValues={{
           email: "",
@@ -47,9 +47,7 @@ const Login = (props) => {
                 onChange={formik.handleChange}
               />
               {formik.errors.email && (
-                <div className="text-red-500 font-bold">
-                  {formik.errors.email}
-                </div>
+                <div className="text-red-500">{formik.errors.email}</div>
               )}
             </div>
             <div className="">
@@ -61,9 +59,7 @@ const Login = (props) => {
                 onChange={formik.handleChange}
               />
               {formik.errors.password && (
-                <div className="text-red-500 font-bold">
-                  {formik.errors.password}
-                </div>
+                <div className="text-red-500">{formik.errors.password}</div>
               )}
             </div>
             <div className="flex items-baseline justify-between">

@@ -7,7 +7,7 @@ import Header from "../src/Components/Header/Header";
 import Instructions from "./Pages/Instructions/Instructions";
 import Questions from "./Pages/Questions/Questions";
 import Home from "./Pages/Home/Home";
-import Login from "./Pages/LoginSignup/Login";
+import Login from "./Pages/Auth/Login";
 import { connect } from "react-redux";
 import { login } from "./store/actions";
 import Contest from "./Pages/Contest/Contest"
