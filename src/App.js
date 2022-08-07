@@ -24,29 +24,31 @@ function App(props) {
   }, []);
 
   return (
-    <div>
-      <Header />
-      <Routes>
-        <Route
-          path="/contests/:id/instructions"
-          element={<Instructions />}
-        ></Route>
-        <Route path="/contests/:id/solve" element={<Questions />}></Route>
-        <Route path="/contests/:id"></Route>
-        <Route path="/contests" element={<Contest />}></Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Home />}></Route>
-      </Routes>
+    <div className="app">
+      <div className="overlay">
+        <Header />
+        <Routes>
+          <Route
+            path="/contests/:id/instructions"
+            element={<Instructions />}
+          ></Route>
+          <Route path="/contests/:id/solve" element={<Questions />}></Route>
+          <Route path="/contests/:id"></Route>
+          <Route path="/contests" element={<Contest />}></Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Home />}></Route>
+        </Routes>
 
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        draggable
-        pauseOnHover
-      />
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          draggable
+          pauseOnHover
+        />
+      </div>
     </div>
   );
 }

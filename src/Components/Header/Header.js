@@ -14,13 +14,13 @@ const Header = (props) => {
   }
 
   return (
-    <nav
+    <div
       className={
-        "text-white relative shadow-lg bg-gradient-to-r from-slate-800 via-gray-800 to-gray-900 flex flex-wrap items-center justify-between px-2 py-3 z-50"
+        "relative shadow-lg flex flex-wrap items-center justify-between px-2 py-3 z-50 text-white"
       }
     >
-      <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-        <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+      <div className="container px-4 mx-auto flex flex-wrap items-center justify-between text-white">
+        <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start text-white">
           {props.isAuthenticated && (
             <div className=" font-bold text-2xl flex items-center text-gray-300">
               <img
@@ -33,14 +33,14 @@ const Header = (props) => {
             </div>
           )}
           <button
-            className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+            className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none text-white z-10 bg-black"
             type="button"
             onClick={() => setNavbarOpen(!navbarOpen)}
           >
             <i
               className={
                 (props.transparent ? "text-white" : "text-gray-50") +
-                " fas fa-bars"
+                "fas fa-bars"
               }
             ></i>
           </button>
@@ -58,12 +58,7 @@ const Header = (props) => {
                 <Link
                   to={`/`}
                   onClick={() => setNavbarOpen(!navbarOpen)}
-                  className={
-                    (props.transparent
-                      ? "lg:text-white lg:hover:text-gray-100 text-gray-50"
-                      : "text-gray-50 hover:text-gray-100") +
-                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold hover:text-cyan-300"
-                  }
+                  className="px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold hover:text-cyan-300"
                 >
                   <span className="hide-sm">Home</span>
                 </Link>
@@ -73,9 +68,6 @@ const Header = (props) => {
                   to={`/contests`}
                   onClick={() => setNavbarOpen(!navbarOpen)}
                   className={
-                    (props.transparent
-                      ? "lg:text-white lg:hover:text-gray-100 text-gray-50"
-                      : "text-gray-50 hover:text-gray-100") +
                     " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold hover:text-cyan-300"
                   }
                 >
@@ -87,12 +79,7 @@ const Header = (props) => {
                   onClick={logout}
                   to="/"
                   replace
-                  className={
-                    (props.transparent
-                      ? "lg:text-white lg:hover:text-gray-100 text-gray-50"
-                      : "text-gray-50 hover:text-gray-100") +
-                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold hover:text-cyan-300"
-                  }
+                  className=" px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold hover:text-cyan-300"
                 >
                   <i className="fas fa-sign-out-alt"></i>
                   <span className="hide-sm"> &nbsp;Logout</span>
@@ -104,12 +91,7 @@ const Header = (props) => {
               <li className="nav-item">
                 <Link
                   to="/login"
-                  className={
-                    (props.transparent
-                      ? "lg:text-white lg:hover:text-gray-100 text-gray-50"
-                      : "text-gray-50 hover:text-gray-100") +
-                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold hover:text-cyan-300"
-                  }
+                  className="px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold hover:text-cyan-300"
                 >
                   Login
                 </Link>
@@ -118,7 +100,7 @@ const Header = (props) => {
           )}
         </div>
       </div>
-    </nav>
+    </div>
   );
 };
 
