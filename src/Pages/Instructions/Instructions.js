@@ -39,7 +39,7 @@ const Instructions = () => {
           <Footer>
             <Link to="/:id/solve">
               <Button type="primary" size="large">
-                next
+                Next
               </Button>
             </Link>
           </Footer>

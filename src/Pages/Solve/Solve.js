@@ -5,7 +5,7 @@ import {
 } from "@ant-design/icons";
 import "../../App.less";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
-import { Steps } from "antd";
+import { Col, Grid, Radio, Row, Steps } from "antd";
 import { Layout, Card, Button, Space } from "antd";
 import React, { useState } from "react";
 import { connect } from "react-redux";
@@ -65,24 +65,15 @@ const Solve = () => {
           <Loader></Loader>
         </div>
       ) : (
-        <div style={{ backgroundColor: "#fff" }}>
-          <div
-            style={{
-              margin: sm ? "10px" : "5px",
-              fontSize: sm ? "30px" : "15px",
-              padding: "5px",
-            }}
-          >
-            <HourglassOutlined
-              spin="true"
-              style={{
-                color: "black",
-                fontSize: sm ? "30px" : "15px",
-                marginLeft: sm ? "10px" : "4px",
-                alignSelf: "center",
-              }}
-            />
-            30:00:00
+        <div
+          style={{ backgroundColor: "#fff" }}
+          className="h-max p-4 md:p-8 space-y-4"
+        >
+          <div className=" flex justify-between">
+            <div className=" flex space-x-4 justify-center items-center text-lg border p-2 rounded">
+              <HourglassOutlined />
+              <div>30:00:00</div>
+            </div>
             <Button
               type="primary"
               style={{
@@ -95,225 +86,35 @@ const Solve = () => {
               Submit
             </Button>
           </div>
-          <Layout
-            style={{
-              height: "100vh",
-              border: "2px solid ",
-              borderTop: "0px",
-              overflow: "auto",
-              backgroundColor: "#fff",
-            }}
-          >
-            <Layout className="site-layout">
-              <Content
-                className="site-layout-background"
-                style={{
-                  margin: "24px 16px",
-                  marginTop: sm ? "24px" : "16px",
-                  padding: 24,
-                  minHeight: 280,
-                }}
+          <Row gutter={16}>
+            <Col span={sm ? 6 : 24} className="space-y-2">
+              <div className="text-lg">Question Pallete</div>
+              <div className="grid grid-cols-5 gap-2">
+                {Array(30)
+                  .fill()
+                  .map((ele, index) => {
+                    return <Button>{index + 1}</Button>;
+                  })}
+              </div>
+            </Col>
+            <Col span={sm ? 18 : 24} className="space-y-2">
+              <div className="text-lg">Question Description</div>
+              <Card
+                className="m-0 w-full"
+                title={`Q${1}. Question Description`}
               >
-                <div
-                  style={{
-                    margin: "2px",
-                    fontSize: "1.1rem",
-                    fontWeight: "bold",
-                    borderBottom: "2px solid black",
-                  }}
-                >
-                  Question {currquestion + 1} :
-                </div>
-                <div
-                  style={{
-                    margin: "2px",
-                    marginBottom: "10px",
-                    fontSize: "1.1rem",
-                    fontWeight: "normal",
-                  }}
-                >
-                  {que[currquestion].statment}
-                </div>
-                {que[currquestion].options.map((opt, optindx) => (
-                  <div onClick={optionClicked}>
-                    <Option optionstatement={{ opt, optindx }} />
-                  </div>
-                ))}
-                <div>
-                  <Card
-                    bodyStyle={{
-                      padding: "0px",
-                      margin: "0px",
-                      width: "100%",
-                      border: "0px solid white",
-                      backgroundColor: "#f0f2f5",
-                    }}
-                  >
-                    <Button
-                      type="primary"
-                      size={"large"}
-                      style={{ margin: "10px", backgroundColor: "#3b82f6 " }}
-                    >
-                      Bookmark
-                    </Button>
-                    <Button
-                      type="primary"
-                      size={"large"}
-                      disabled={currquestion < que.length - 1 ? false : true}
-                      style={{ backgroundColor: "#3b82f6 " }}
-                      onClick={savenext}
-                    >
-                      Save and Next
-                    </Button>
-                  </Card>
-                </div>
-              </Content>
-              {sm ? (
-                <>
-                  <Header
-                    className="site-layout-background"
-                    style={{
-                      padding: 0,
-                      alignSelf: "center",
-                      backgroundColor: "white",
-                      fontSize: "20px",
-                    }}
-                  >
-                    {React.createElement(
-                      collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-                      {
-                        className: "trigger",
-                        onClick: () => setCollapsed(!collapsed),
-                      }
-                    )}
-                  </Header>
-                  <Sider
-                    trigger={null}
-                    collapsible
-                    collapsed={collapsed}
-                    width={sm ? "500" : "250"}
-                    collapsedWidth={0}
-                    style={{
-                      backgroundColor: "white",
-                      margin: "24px",
-                      borderRight: "1px solid white",
-                      borderLeft: "1px solid grey",
-                      boxShadow: "inset 2px 3px grey",
-                    }}
-                  >
-                    <Space size={[8, 16]} wrap style={{ paddingTop: "8px" }}>
-                      {que.map((_, index) => (
-                        <Button
-                          shape="circle"
-                          size="large"
-                          style={{
-                            margin: "12px",
-                            color: "black",
-                            padding: "1px",
-                            borderColor: "gray",
-                            backgroundColor: "#99f6e4",
-                          }}
-                          onClick={() => setCurrquestion(index)}
-                        >
-                          {index + 1}
-                        </Button>
+                <Radio.Group onChange={() => {}} value={1}>
+                  <Space direction={"vertical"}>
+                    {Array(4)
+                      .fill()
+                      .map((ele, index) => (
+                        <Radio value={index}>Option: {index}</Radio>
                       ))}
-                      <Button
-                        shape="circle"
-                        size="large"
-                        style={{
-                          margin: "12px",
-                          color: "black",
-                          padding: "1px",
-                          borderColor: "grey",
-                          backgroundColor: "blue",
-                        }}
-                      >
-                        21
-                      </Button>
-                      <Button
-                        shape="circle"
-                        size="large"
-                        style={{
-                          margin: "12px",
-                          color: "black",
-                          padding: "1px",
-                          borderColor: "green",
-                          backgroundColor: "green",
-                        }}
-                      >
-                        22
-                      </Button>
-                    </Space>
-                  </Sider>
-                </>
-              ) : (
-                <>
-                  <Header
-                    className="site-layout-background"
-                    style={{
-                      padding: 0,
-                      alignSelf: "center",
-                      backgroundColor: "white",
-                      width: "1px",
-                      margin: "0px",
-                      fontSize: "20px",
-                    }}
-                  >
-                    {React.createElement(
-                      collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-                      {
-                        className: "trigger",
-                        onClick: () => setCollapsed(!collapsed),
-                      }
-                    )}
-                  </Header>
-                  <Sider
-                    trigger={null}
-                    collapsible
-                    collapsed={collapsed}
-                    width={50}
-                    collapsedWidth={0}
-                    style={{
-                      margin: "10px",
-                      borderRight: "0.5px slid white",
-                      borderLeft: "0.5px solid white",
-                      paddingLeft: "4px",
-                      overflow: "auto",
-                      height: "100vh",
-                      backgroundColor: "white",
-                      boxShadow: "inset 0.5px 1px grey",
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        flexWrap: "wrap",
-                        flexDirection: "column",
-                      }}
-                    >
-                      {que.map((_, index) => (
-                        <Button
-                          shape="circle"
-                          size="large"
-                          style={{
-                            margin: "8px 2px 8px 2px",
-                            color: "black",
-                            padding: "1px",
-                            borderColor: "gray",
-                            backgroundColor: "#99f6e4",
-                          }}
-                          onClick={() => setCurrquestion(index)}
-                        >
-                          {index + 1}
-                        </Button>
-                      ))}
-                    </div>
-                  </Sider>
-                </>
-              )}
-            </Layout>
-          </Layout>
+                  </Space>
+                </Radio.Group>
+              </Card>
+            </Col>
+          </Row>
         </div>
       )}
     </>
