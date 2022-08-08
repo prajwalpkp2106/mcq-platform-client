@@ -74,28 +74,22 @@ const Solve = () => {
               <HourglassOutlined />
               <div>30:00:00</div>
             </div>
-            <Button
-              type="primary"
-              style={{
-                float: "right",
-                backgroundColor: "red",
-                alignSelf: "center",
-              }}
-              size={sm ? "large" : "small"}
-            >
-              Submit
-            </Button>
+            <Button className=" border border-green-500 hover:border-green-500 hover:bg-green-500 hover:text-white text-base text-green-500 p-0 px-6 h-auto">Submit</Button>
           </div>
           <Row gutter={16}>
-            <Col span={sm ? 6 : 24} className="space-y-2">
+            <Col span={sm ? 6 : 24} className="space-y-4">
               <div className="text-lg">Question Pallete</div>
               <div className="grid grid-cols-5 gap-2">
                 {Array(30)
                   .fill()
                   .map((ele, index) => {
-                    return <Button>{index + 1}</Button>;
+                    return (
+                      <Button className=" rounded-full">{index + 1}</Button>
+                    );
                   })}
               </div>
+              <hr />
+              <CommandPalleteDescription />
             </Col>
             <Col span={sm ? 18 : 24} className="space-y-2">
               <div className="text-lg">Question Description</div>
@@ -103,7 +97,11 @@ const Solve = () => {
                 className="m-0 w-full"
                 title={`Q${1}. Question Description`}
               >
-                <Radio.Group onChange={() => {}} value={1}>
+                <Radio.Group
+                  onChange={() => {}}
+                  value={1}
+                  className="w-full mb-4"
+                >
                   <Space direction={"vertical"}>
                     {Array(4)
                       .fill()
@@ -112,6 +110,9 @@ const Solve = () => {
                       ))}
                   </Space>
                 </Radio.Group>
+                <Button className=" float-right" danger>
+                  Clear Response
+                </Button>
               </Card>
             </Col>
           </Row>
@@ -120,6 +121,26 @@ const Solve = () => {
     </>
   );
 };
+
+const CommandPalleteDescription = () => {
+  return (
+    <div className="space-y-2">
+      <div className="flex space-x-2 items-center">
+        <Button className=" bg-sky-500">Q</Button>
+        <div>Bookmarked</div>
+      </div>
+      <div className="flex space-x-2 items-center">
+        <Button className=" bg-green-400">Q</Button>
+        <div>Attempted</div>
+      </div>
+      <div className="flex space-x-2 items-center">
+        <Button className="">Q</Button>
+        <div>Unattempted</div>
+      </div>
+    </div>
+  );
+};
+
 function mapStateToProps(state) {
   return {};
 }
