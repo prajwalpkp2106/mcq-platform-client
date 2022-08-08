@@ -4,7 +4,6 @@ import { useParams } from "react-router";
 import { useState } from "react";
 const { Header, Footer, Sider, Content } = Layout;
 
-
 const data = [];
 
 const Instructions = () => {
@@ -38,7 +37,7 @@ const Instructions = () => {
             ))}
           </ol>
           <Footer>
-            <Link to="/contests/:id/solve">
+            <Link to="/:id/solve">
               <Button type="primary" size="large">
                 next
               </Button>

@@ -4,7 +4,7 @@ import "./App.less";
 import "antd/dist/antd.css";
 import Header from "../src/Components/Header/Header";
 import Instructions from "./Pages/Instructions/Instructions";
-import Questions from "./Pages/Questions/Questions";
+import Questions from "./Pages/Solve/Solve";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Auth/Login";
 import { connect } from "react-redux";
@@ -27,13 +27,9 @@ function App(props) {
       <div className="overlay">
         <Header />
         <Routes>
-          <Route
-            path="/contests/:id/instructions"
-            element={<Instructions />}
-          ></Route>
-          <Route path="/contests/:id/solve" element={<Questions />}></Route>
-    
-          <Route path="/contests" element={<Contest />}></Route>
+          <Route path=":id/instructions" element={<Instructions />}></Route>
+          <Route path=":id/solve" element={<Questions />}></Route>
+          <Route path="contests" element={<Contest />}></Route>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />}></Route>
         </Routes>

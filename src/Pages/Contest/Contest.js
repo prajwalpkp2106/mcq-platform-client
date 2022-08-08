@@ -42,7 +42,7 @@ const Contest = () => {
   // },[]);
 
   return (
-    <div className="w-full md:w-10/12 mx-auto p-2 md:p-4 grid items-center md:grid-cols-3 gap-5 content-center">
+    <div className="w-full md:w-10/12 mx-auto p-2 md:p-4 grid md:grid-cols-2 items-center xl:grid-cols-3 gap-5 content-center">
       {loading ? (
         <div>
           <Loader></Loader>
@@ -65,12 +65,6 @@ const Contest = () => {
                     </div>
                   </div>
                 }
-                // bodyStyle={{
-                //   background: "rgb(0,0,0,0.5)",
-                // }}
-                // headStyle={{
-                //   background: "rgb(50, 50, 50, 0.2)",
-                // }}
                 className=" w-80 md:w-[400px] bg-white inline-block text-black mx-auto border-none shadow-cyan-300"
               >
                 <div className="space-y-4">
@@ -79,10 +73,10 @@ const Contest = () => {
                     Inner Card content
                   </div>
                   <div className="float-left">Starts In: 12:23:00</div>
-                  <Link to={`/contest/${contest._id}`}>
+                  <Link to={`/${contest._id}/instructions`}>
                     <Button
                       type="primary"
-                      className=" float-right border-black text-black"
+                      className=" float-right border-black text-black bg-sky-300 border-none"
                     >
                       Detail
                     </Button>
