@@ -30,7 +30,8 @@ const Login = (props) => {
           setError(null);
           Requests.login(values)
             .then((res) => {
-              localStorage.setItem("xenia-mcq", res.data.token);
+              console.log(res);
+              localStorage.setItem("xenia-mcq", res.data.data.token);
               props.login(res.data);
               props.closeModal();
             })
