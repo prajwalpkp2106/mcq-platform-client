@@ -74,9 +74,11 @@ const Solve = () => {
               <HourglassOutlined />
               <div>30:00:00</div>
             </div>
-            <Button className=" border border-green-500 hover:border-green-500 hover:bg-green-500 hover:text-white text-base text-green-500 p-0 px-6 h-auto">Submit</Button>
+            <Button className=" border border-green-500 hover:border-green-500 hover:bg-green-500 hover:text-white text-base text-green-500 p-0 px-6 h-auto">
+              Submit
+            </Button>
           </div>
-          <Row gutter={16}>
+          <Row gutter={32}>
             <Col span={sm ? 6 : 24} className="space-y-4">
               <div className="text-lg">Question Pallete</div>
               <div className="grid grid-cols-5 gap-2">
@@ -110,9 +112,10 @@ const Solve = () => {
                       ))}
                   </Space>
                 </Radio.Group>
-                <Button className=" float-right" danger>
-                  Clear Response
-                </Button>
+                <div className=" float-right space-x-2">
+                  <Button type={'primary'} className=' bg-sky-500'>Bookmark</Button>
+                  <Button danger className=" hover:bg-red-500 hover:text-white">Clear Response</Button>
+                </div>
               </Card>
             </Col>
           </Row>
