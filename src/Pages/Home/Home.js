@@ -15,10 +15,10 @@ export default function Home() {
           MCQ Platform
         </div>
         <div className="grid grid-cols-2 mx-auto gap-6 py-4">
-          <a href="pcsbxenia.com" target={"_blank"}>
+          <a href="https://pcsbxenia.com/" rel="noreferrer" target="_blank">
             <div className="h-[200px] w-[300px] bg-gray-50"></div>
           </a>
-          <a href="pcsbxenia.com" target={"_blank"}>
+          <a href="https://pcsbxenia.com/" rel="noreferrer" target="_blank">
             <div className="h-[200px] w-[300px] bg-gray-50"></div>
           </a>
         </div>

@@ -13,6 +13,7 @@ import Contest from "./Pages/Contest/Contest";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
+import NotFound from "./Pages/404/404";
 
 function App(props) {
   useEffect(() => {
@@ -29,9 +30,10 @@ function App(props) {
         <Routes>
           <Route path=":id/instructions" element={<Instructions />}></Route>
           <Route path=":id/solve" element={<Questions />}></Route>
-          <Route path="contests" element={<Contest />}></Route>
+          <Route path="/contests" element={<Contest />}></Route>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
 
         <ToastContainer
