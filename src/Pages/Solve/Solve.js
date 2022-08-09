@@ -30,11 +30,10 @@ var que = [
 ];
 
 const Solve = () => {
-  const [collapsed, setCollapsed] = useState(false);
   // const { id } = useParams();
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [currquestion, setCurrquestion] = useState(0);
+  const [currquestion, setCurrquestion] = useState(1);
   let permit = false;
   // useEffect(()=>{
   //     setLoading(true);
@@ -46,6 +45,40 @@ const Solve = () => {
   //     .catch((error)=>{})
 
   // },[]);
+
+  function QuestionPallete() {
+    return (
+      <div className="grid grid-cols-5 gap-2">
+        {Array(30)
+          .fill()
+          .map((ele, index) => {
+            return (
+              <Button
+                onClick={() => setCurrquestion(index + 1)}
+                className={`rounded-full hover:bg-yellow-50 hover:border-gray-100 hover:text-black 
+                
+                // current question
+                ${
+                  currquestion == index + 1
+                    ? " bg-yellow-500 "
+                    : // solved
+                    false
+                    ? " bg-green-500 "
+                    : // bookmarked
+                    false
+                    ? " bg-blue-500"
+                    : ""
+                }
+                `}
+              >
+                {index + 1}
+              </Button>
+            );
+          })}
+      </div>
+    );
+  }
+
   function optionClicked(question) {
     console.log("option chooses send ");
   }
@@ -81,15 +114,7 @@ const Solve = () => {
           <Row gutter={32}>
             <Col span={sm ? 6 : 24} className="space-y-4">
               <div className="text-lg">Question Pallete</div>
-              <div className="grid grid-cols-5 gap-2">
-                {Array(30)
-                  .fill()
-                  .map((ele, index) => {
-                    return (
-                      <Button className=" rounded-full">{index + 1}</Button>
-                    );
-                  })}
-              </div>
+              <QuestionPallete />
               <hr />
               <CommandPalleteDescription />
             </Col>
@@ -113,8 +138,12 @@ const Solve = () => {
                   </Space>
                 </Radio.Group>
                 <div className=" float-right space-x-2">
-                  <Button type={'primary'} className=' bg-sky-500'>Bookmark</Button>
-                  <Button danger className=" hover:bg-red-500 hover:text-white">Clear Response</Button>
+                  <Button type={"primary"} className=" bg-sky-500">
+                    Bookmark
+                  </Button>
+                  <Button danger className=" hover:bg-red-500 hover:text-white">
+                    Clear Response
+                  </Button>
                 </div>
               </Card>
             </Col>

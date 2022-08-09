@@ -6,7 +6,7 @@ import { Validators } from "../../utils";
 import { connect } from "react-redux";
 import * as Requests from "../../utils/Requests";
 import { Formik, Field } from "formik";
-import { login } from "../../store/actions";
+import { login, startLoading, stopLoading } from "../../store/actions";
 import { Navigate } from "react-router-dom";
 const Login = (props) => {
   const [error, setError] = useState(null);
@@ -27,15 +27,17 @@ const Login = (props) => {
         }}
         validationSchema={validate}
         onSubmit={async (values) => {
+          props.startLoading();
           setError(null);
           Requests.login(values)
             .then((res) => {
               localStorage.setItem("xenia-mcq", res.data.data.token);
               props.login(res.data.data);
-              props.closeModal();
+              props.stopLoading();
             })
             .catch((err) => {
               setError(err.response.data.msg);
+              props.stopLoading();
             });
         }}
       >
@@ -92,6 +94,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     login: (data) => dispatch(login(data)),
+    startLoading: () => dispatch(startLoading()),
+    stopLoading: () => dispatch(stopLoading()),
   };
 };
 

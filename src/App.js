@@ -8,9 +8,14 @@ import Questions from "./Pages/Solve/Solve";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Auth/Login";
 import { connect } from "react-redux";
-import { login, setRegisteredEvents } from "./store/actions";
+import {
+  login,
+  setRegisteredEvents,
+  startLoading,
+  stopLoading,
+} from "./store/actions";
 import Contest from "./Pages/Contest/Contest";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import NotFound from "./Pages/404/404";
@@ -18,33 +23,35 @@ import { Requests } from "./utils";
 import { Spin } from "antd";
 
 function App(props) {
-  const [loading, setLoading] = useState(false);
-
   useEffect(() => {
-    setLoading(true);
+    props.startLoading();
     const token = localStorage.getItem("xenia-mcq");
-    console.log(token);
     if (token) {
-      Requests.getUserByToken(token).then(({ data }) => {
-        console.log(data);
-        if (data.success) {
-          props.login(data.data);
-          // get all the registered events for this user
-          Requests.getUserParticipations(data.data._id).then(({ data }) => {
-            if (data.success) {
-              props.setRegisteredEvents(data.data);
-              setLoading(false);
-            }
-          });
-        }
-      });
+      Requests.getUserByToken(token)
+        .then(({ data }) => {
+          if (data.success) {
+            props.login(data.data);
+            // get all the registered events for this user
+            Requests.getUserParticipations(data.data._id)
+              .then(({ data }) => {
+                if (data.success) {
+                  props.setRegisteredEvents(data.data);
+                  props.stopLoading();
+                }
+              })
+              .catch((err) => {
+                props.stopLoading();
+              });
+          }
+        })
+        .catch((err) => {
+          props.stopLoading();
+        });
     }
-    setLoading(false);
-    // props.login(userData);
   }, []);
 
   return (
-    <Spin spinning={loading}>
+    <Spin spinning={props.loading}>
       <div className="app">
         <div className="overlay">
           <Header />
@@ -75,12 +82,15 @@ function App(props) {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.loggedIn,
+    loading: state.loading,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     setRegisteredEvents: (data) => dispatch(setRegisteredEvents(data)),
     login: (data) => dispatch(login(data)),
+    startLoading: () => dispatch(startLoading()),
+    stopLoading: () => dispatch(stopLoading()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
