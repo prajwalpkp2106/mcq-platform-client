@@ -13,13 +13,22 @@ import Contest from "./Pages/Contest/Contest";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
+import { Requests } from "./api";
 
 function App(props) {
   useEffect(() => {
     const userData = {
       name: "Vedant Daigavane",
     };
-    props.login(userData);
+    const token = localStorage.getItem("xenia-mcq");
+    console.log(token);
+    if ( token ) {
+      Requests.getUserByToken(token).then((res) => {
+        console.log(res);
+        props.login(res.data);
+      })
+    }
+    // props.login(userData);
   }, []);
 
   return (

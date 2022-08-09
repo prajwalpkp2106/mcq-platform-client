@@ -29,7 +29,7 @@ const Header = (props) => {
                 }
                 className="h-8 md:h-10 w-auto"
               ></img>
-              <div className=" px-2">{props?.userData?.name}</div>
+              <div className=" px-2">{props?.userData?.data?.name}</div>
             </div>
           )}
           <button

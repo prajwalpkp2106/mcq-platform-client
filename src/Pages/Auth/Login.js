@@ -32,7 +32,7 @@ const Login = (props) => {
             .then((res) => {
               console.log(res);
               localStorage.setItem("xenia-mcq", res.data.data.token);
-              props.login(res.data);
+              props.login(res.data.data);
               props.closeModal();
             })
             .catch((err) => {
