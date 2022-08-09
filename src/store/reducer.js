@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, USERSUBMISSION } from "./actions";
+import { LOGIN, LOGOUT, REGISTEREDEVENTS, USERSUBMISSION } from "./actions";
 
 const initialState = {
   token: localStorage.getItem("usertoken"),
@@ -24,6 +24,12 @@ export default function auth(state = initialState, action) {
         token: null,
         isAuthenticated: false,
         userData: null,
+      };
+    }
+    case REGISTEREDEVENTS: {
+      return {
+        ...state,
+        registeredEvents: payload,
       };
     }
     default:

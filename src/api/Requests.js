@@ -25,3 +25,7 @@ export const getInstructions = () => {
 export const getQuestions = () => {
   return backend.get("/");
 };
+
+export const getUserParticipations = (userId) => {
+  return backend.get("/participant/user/" + userId);
+};
