@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import Option from "../../Components/Option";
 import Loader from "../../Components/Loader/Loader";
-import { getQuestions } from "../../api/Requests";
+import { getQuestions } from "../../utils/Requests";
 const { Header, Sider, Content } = Layout;
 const { Step } = Steps;
 

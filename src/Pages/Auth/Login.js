@@ -4,7 +4,7 @@ import "tailwindcss/tailwind.css";
 import * as Yup from "yup";
 import { Validators } from "../../utils";
 import { connect } from "react-redux";
-import * as Requests from "../../api/Requests";
+import * as Requests from "../../utils/Requests";
 import { Formik, Field } from "formik";
 import { login } from "../../store/actions";
 import { Navigate } from "react-router-dom";
@@ -30,8 +30,8 @@ const Login = (props) => {
           setError(null);
           Requests.login(values)
             .then((res) => {
-              localStorage.setItem("xenia-mcq", res.data.token);
-              props.login(res.data);
+              localStorage.setItem("xenia-mcq", res.data.data.token);
+              props.login(res.data.data);
               props.closeModal();
             })
             .catch((err) => {

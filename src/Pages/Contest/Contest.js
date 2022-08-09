@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button, Spin, Alert } from "antd";
 
-import Loader from "../../Components/Loader/Loader";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { getAllContests } from "../../api/Requests";
+import { getAllContests } from "../../utils/Requests";
 import { Requests } from "../../utils";
 import Countdown from "../../Components/Countdown";
 

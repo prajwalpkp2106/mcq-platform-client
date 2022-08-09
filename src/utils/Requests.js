@@ -10,7 +10,7 @@ export const login = (data) => {
 
 export const getUserByToken = (token) => {
   return backend.get("/auth/profile", {
-    headers: { authorization: token },
+    headers: { authorization: "Bearer " + token },
   });
 };
 

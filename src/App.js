@@ -22,19 +22,25 @@ function App(props) {
 
   useEffect(() => {
     setLoading(true);
-    const userData = {
-      name: "Vedant Daigavane",
-      _id: "62f1fc115f5d2337c06e453b",
-    };
-    props.login(userData);
-    Requests.getUserParticipations(userData._id).then((res) => {
-      res = res.data;
-      if (res.success) {
-        props.setRegisteredEvents(res.data);
-        console.log(res);
-        setLoading(false);
-      }
-    });
+    const token = localStorage.getItem("xenia-mcq");
+    console.log(token);
+    if (token) {
+      Requests.getUserByToken(token).then(({ data }) => {
+        console.log(data);
+        if (data.success) {
+          props.login(data.data);
+          // get all the registered events for this user
+          Requests.getUserParticipations(data.data._id).then(({ data }) => {
+            if (data.success) {
+              props.setRegisteredEvents(data.data);
+              setLoading(false);
+            }
+          });
+        }
+      });
+    }
+    setLoading(false);
+    // props.login(userData);
   }, []);
 
   return (
