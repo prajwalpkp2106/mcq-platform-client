@@ -1,45 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button } from "antd";
-import { getContest } from "../../api/Requests";
+
 import Loader from "../../Components/Loader/Loader";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-const Data = [
-  {
-    name: "first",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/SVG_Logo.svg/1200px-SVG_Logo.svg.png",
-    _id: 12,
-  },
-  {
-    name: "first",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/SVG_Logo.svg/1200px-SVG_Logo.svg.png",
-  },
-  {
-    name: "first",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/SVG_Logo.svg/1200px-SVG_Logo.svg.png",
-  },
-  {
-    name: "first",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/SVG_Logo.svg/1200px-SVG_Logo.svg.png",
-  },
-];
+import { getAllContests } from "../../api/Requests";
+import { Requests } from "../../utils";
+
 const Contest = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  // useEffect(()=>{
-  //     setLoading(true);
-  //     getContest()
-  //     .then((res)=>{
-  //         setData(res);
-  //         setLoading(false);
-  //     })
-  //     .catch((error)=>{})
-
-  // },[]);
+  useEffect(() => {
+    setLoading(true);
+    Requests.getAllContests()
+      .then((res) => {
+        const response = res.data;
+        if (response.success) {
+          setData(response.data);
+          setLoading(false);
+        }
+      })
+      .catch((error) => {});
+  }, []);
 
   return (
     <div className="w-full md:w-10/12 mx-auto p-2 md:p-4 grid md:grid-cols-2 items-center xl:grid-cols-3 gap-5 content-center">
@@ -49,7 +31,7 @@ const Contest = () => {
         </div>
       ) : (
         <>
-          {Data.map((contest) => {
+          {data.map((contest) => {
             return (
               <Card
                 title={
@@ -61,17 +43,14 @@ const Contest = () => {
                       ></img>
                     </div>
                     <div className=" font-bolds tracking-wider text-lg">
-                      Title
+                      {contest.title}
                     </div>
                   </div>
                 }
                 className=" w-80 md:w-[400px] bg-white inline-block text-black mx-auto border-none shadow-cyan-300"
               >
                 <div className="space-y-4">
-                  <div className="">
-                    Inner Card content Inner Card content Inner Card content
-                    Inner Card content
-                  </div>
+                  <div className="">{contest.descriptions[0]}</div>
                   <div className="float-left">Starts In: 12:23:00</div>
                   <Link to={`/${contest._id}/instructions`}>
                     <Button
