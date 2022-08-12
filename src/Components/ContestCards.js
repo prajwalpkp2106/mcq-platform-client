@@ -10,7 +10,7 @@ function ContestCards({ contest, ...props }) {
   useEffect(() => {
     function checkIfRegistered(contestId) {
       const list = props.registeredEvents.filter(
-        (event) => event.contestId == contestId
+        (event) => event.contestId === contestId
       );
 
       list.length > 0 && setRegistered(true);
@@ -24,7 +24,7 @@ function ContestCards({ contest, ...props }) {
       title={
         <div className="space-y-4">
           <div className="w-full">
-            <img className="h-[150px] mx-auto my-2" src={contest.logo}></img>
+            <img className="h-[150px] mx-auto my-2" alt="contest logo" src={contest.logo}></img>
           </div>
           <div className=" font-bolds tracking-wider text-lg">
             {contest.title}
@@ -40,7 +40,7 @@ function ContestCards({ contest, ...props }) {
         </div>
         {contest.status.time ? (
           <div className="flex justify-between">
-            {contest.status.description == "RUNNING" ? (
+            {contest.status.description === "RUNNING" ? (
               <>
                 <div className="text-red-400">Ends in</div>
                 <Countdown seconds={contest.status.time}></Countdown>

@@ -11,7 +11,7 @@ export default function Countdown({ seconds }) {
       setTimer(() => timer - 1);
     }, 1000);
 
-    if (timer == 0) {
+    if (timer === 0) {
       navigate("/");
       clearInterval(timerInterval);
       toast("Test Completed", { type: "info", icon: true });

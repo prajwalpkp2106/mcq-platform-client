@@ -15,9 +15,9 @@ import {
   stopLoading,
 } from "./store/actions";
 import Contest from "./Pages/Contest/Contest";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import NotFound from "./Pages/404/404";
 import { Requests } from "./utils";
 import { Spin } from "antd";

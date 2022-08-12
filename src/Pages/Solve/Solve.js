@@ -1,40 +1,39 @@
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   HourglassOutlined,
 } from "@ant-design/icons";
 import "../../App.less";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
-import { Col, Grid, Radio, Row, Steps } from "antd";
-import { Layout, Card, Button, Space } from "antd";
+import { Col, Radio, Row } from "antd";
+import { Card, Button, Space } from "antd";
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import Option from "../../Components/Option";
+// import Option from "../../Components/Option";
 import Loader from "../../Components/Loader/Loader";
-import { getQuestions } from "../../utils/Requests";
-const { Header, Sider, Content } = Layout;
-const { Step } = Steps;
+// import { getQuestions } from "../../utils/Requests";
+// const { Header, Sider, Content } = Layout;
+// const { Step } = Steps;
 
-var que = [
-  {
-    number: "1",
-    statment:
-      "Which of the following can be considered as the correct syntax for declaring an array  of pointers of integers that has a size of 10 in C++ ?",
-    options: ["option 1", "option 2", "option 3", "opttion 4"],
-  },
-  {
-    number: "2",
-    statment: "Which of the following can be considered as the c?",
-    options: ["cpp", "java", "node", "python"],
-  },
-];
+// var que = [
+//   {
+//     number: "1",
+//     statment:
+//       "Which of the following can be considered as the correct syntax for declaring an array  of pointers of integers that has a size of 10 in C++ ?",
+//     options: ["option 1", "option 2", "option 3", "opttion 4"],
+//   },
+//   {
+//     number: "2",
+//     statment: "Which of the following can be considered as the c?",
+//     options: ["cpp", "java", "node", "python"],
+//   },
+// ];
 
 const Solve = () => {
   // const { id } = useParams();
-  const [questions, setQuestions] = useState([]);
+  // const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
+  if(1 < 0) setLoading();
   const [currquestion, setCurrquestion] = useState(1);
-  let permit = false;
+  // let permit = false;
   // useEffect(()=>{
   //     setLoading(true);
   //     getQuestions()
@@ -59,7 +58,7 @@ const Solve = () => {
                 
                 // current question
                 ${
-                  currquestion == index + 1
+                  currquestion === index + 1
                     ? " bg-yellow-500 "
                     : // solved
                     false
@@ -79,16 +78,16 @@ const Solve = () => {
     );
   }
 
-  function optionClicked(question) {
-    console.log("option chooses send ");
-  }
-  const Bookmarked = () => {
-    // set bookmarked state of que to true;
-  };
-  const savenext = () => {
-    //send request to backend to save current que ans and the  next
-    setCurrquestion(currquestion + 1);
-  };
+  // function optionClicked(question) {
+  //   console.log("option chooses send ");
+  // }
+  // const Bookmarked = () => {
+  //   // set bookmarked state of que to true;
+  // };
+  // const savenext = () => {
+  //   //send request to backend to save current que ans and the  next
+  //   setCurrquestion(currquestion + 1);
+  // };
 
   const { sm } = useBreakpoint(); // lg is one of the elements returned if screenwidth exceeds 991
   return (
