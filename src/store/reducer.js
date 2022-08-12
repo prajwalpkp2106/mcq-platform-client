@@ -1,4 +1,5 @@
 import {
+  BOOKMARKORATTEMP,
   ENTERCONTEST,
   LOGIN,
   LOGOUT,
@@ -58,10 +59,29 @@ export default function auth(state = initialState, action) {
     }
     case ENTERCONTEST: {
       state.registeredEvents = state.registeredEvents.map((event) => {
-        if (event._id == payload._id) {
+        if (event.contestId == payload.contestId) {
           return payload;
         }
         return event;
+      });
+
+      return {
+        ...state,
+      };
+    }
+    case BOOKMARKORATTEMP: {
+      state.registeredEvents = state.registeredEvents.filter((contest) => {
+        if (contest.contestId === payload.contestId) {
+          contest.questions = contest.questions?.map((question) => {
+            if (question.questionId === payload.questionId) {
+              console.log("Match found for questionId");
+              question.bookmark = payload.bookmark;
+              question.attempted = payload.attempted;
+            }
+            return question;
+          });
+        }
+        return contest;
       });
 
       return {

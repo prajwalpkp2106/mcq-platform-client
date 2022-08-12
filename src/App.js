@@ -50,7 +50,7 @@ function App(props) {
     } else {
       props.stopLoading();
     }
-  }, []);
+  }, [props.isAuthenticated]);
 
   return (
     <Spin spinning={props.loading} tip={props.loadingMessage}>

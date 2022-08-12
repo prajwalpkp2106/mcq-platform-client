@@ -38,3 +38,7 @@ export const checkIfUserRegisteredForContest = (userId, contestId) => {
 export const enterContest = (userId, contestId) => {
   return backend.post(`/participant/entercontest/${contestId}/${userId}`);
 };
+
+export const getQuestionById = (questionId) => {
+  return backend.get(`/question/${questionId}`);
+};

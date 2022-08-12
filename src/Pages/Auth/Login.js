@@ -37,7 +37,7 @@ const Login = (props) => {
                 localStorage.setItem("xenia-mcq", res.data.token);
                 props.login(res.data);
               } else {
-                setError(res.data.error);
+                setError(res.error);
               }
               props.stopLoading();
             })

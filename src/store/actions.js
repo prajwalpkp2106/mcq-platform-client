@@ -4,6 +4,7 @@ export const REGISTEREDEVENTS = "REGISTEREDEVENTS";
 export const STARTLOADING = "STARTLOADING";
 export const STOPLOADING = "STOPLOADING";
 export const ENTERCONTEST = "ENTERCONTEST";
+export const BOOKMARKORATTEMP = "BOOKMARKORATTEMP";
 
 export const login = (userData) => {
   return {
@@ -30,4 +31,16 @@ export const stopLoading = () => {
 
 export const enterContest = (participantDetails) => {
   return { type: ENTERCONTEST, payload: participantDetails };
+};
+
+export const bookmarkOrAttempt = ({
+  contestId,
+  questionId,
+  bookmark,
+  attempted,
+}) => {
+  return {
+    type: BOOKMARKORATTEMP,
+    payload: { contestId, questionId, bookmark, attempted },
+  };
 };
