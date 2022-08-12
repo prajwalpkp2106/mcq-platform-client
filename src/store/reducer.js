@@ -1,9 +1,18 @@
-import { LOGIN, LOGOUT, REGISTEREDEVENTS, USERSUBMISSION } from "./actions";
+import {
+  LOGIN,
+  LOGOUT,
+  REGISTEREDEVENTS,
+  STARTLOADING,
+  STOPLOADING,
+  USERSUBMISSION,
+} from "./actions";
 
 const initialState = {
   token: localStorage.getItem("usertoken"),
   isAuthenticated: false,
   userData: {},
+  registeredEvents: [],
+  loading: false,
 };
 
 export default function auth(state = initialState, action) {
@@ -30,6 +39,18 @@ export default function auth(state = initialState, action) {
       return {
         ...state,
         registeredEvents: payload,
+      };
+    }
+    case STARTLOADING: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+    case STOPLOADING: {
+      return {
+        ...state,
+        loading: false,
       };
     }
     default:
