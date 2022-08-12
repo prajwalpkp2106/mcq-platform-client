@@ -7,11 +7,14 @@ import { connect } from "react-redux";
 import { startLoading, stopLoading } from "../../store/actions";
 import { useParams } from "react-router-dom";
 import QuestionCard from "../../Components/QuestionCard";
+import Countdown from "../../Components/Countdown";
+import { Requests } from "../../utils";
 
 const Solve = (props) => {
   const { id } = useParams();
   const [questions, setQuestions] = useState([]);
   const [currquestion, setCurrquestion] = useState(0);
+  const [contestDetails, setContestDetails] = useState({});
 
   function fetchQuestions() {
     props.registeredEvents?.forEach((element) => {
@@ -23,6 +26,13 @@ const Solve = (props) => {
 
   useEffect(() => {
     props.startLoading("Loading your questions");
+    Requests.getContestById(id)
+      .then(({ data: { success, data, error } }) => {
+        if (success) {
+          setContestDetails(data);
+        }
+      })
+      .catch((err) => {});
     fetchQuestions();
     props.stopLoading();
   }, [props.registeredEvents]);
@@ -67,8 +77,11 @@ const Solve = (props) => {
       <div className=" flex justify-between">
         <div className=" flex space-x-4 justify-center items-center text-lg border p-2 rounded">
           <HourglassOutlined />
-          <div>30:00:00</div>
+          {contestDetails?.status?.time && (
+            <Countdown seconds={contestDetails?.status?.time} />
+          )}
         </div>
+        {/* {JSON.stringify(contestDetails.status.time)} */}
         <Button className=" border border-green-500 hover:border-green-500 hover:bg-green-500 hover:text-white text-base text-green-500 p-0 px-6 h-auto">
           Submit
         </Button>
