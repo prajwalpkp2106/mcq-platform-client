@@ -25,7 +25,7 @@ const Solve = (props) => {
     props.startLoading("Loading your questions");
     fetchQuestions();
     props.stopLoading();
-  }, [props.isAuthenticated, props.registeredEvents]);
+  }, [props.registeredEvents]);
 
   function QuestionPallete() {
     return (
@@ -41,10 +41,10 @@ const Solve = (props) => {
                   currquestion === index
                     ? " bg-yellow-500 "
                     : // solved
-                    false
+                    ele.attempted
                     ? " bg-green-500 "
                     : // bookmarked
-                    false
+                    ele.bookmark
                     ? " bg-blue-500"
                     : ""
                 }
@@ -122,7 +122,6 @@ const CommandPalleteDescription = () => {
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: state.isAuthenticated,
     registeredEvents: state.registeredEvents,
   };
 }

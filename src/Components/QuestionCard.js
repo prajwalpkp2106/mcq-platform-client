@@ -2,7 +2,9 @@ import { Button, Card, Radio, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { bookmarkOrAttempt } from "../store/actions";
+import { Requests } from "../utils";
 import { getQuestionById } from "../utils/Requests";
 
 function QuestionCard({ details, ...props }) {
@@ -18,11 +20,54 @@ function QuestionCard({ details, ...props }) {
           if (success) setQuestion(data);
         }
       );
+    props.registeredEvents.forEach((event) => {
+      if (event.contestId == id) {
+        event.questions.forEach((que) => {
+          if (que.questionId === details?.questionId) {
+            setBookmark(que.bookmark);
+            setAttempted(que.attempted);
+          }
+        });
+      }
+    });
   }, [details]);
 
   function clearResponse() {
     setAttempted(null);
     bookmarkOrAttempt(null, bookmark);
+  }
+
+  async function handleAttempted(event) {
+    Requests.attempted({
+      questionId: details.questionId,
+      contestId: id,
+      attempted: event.target.value,
+      userId: props?.userData?._id,
+    })
+      .then(({ data: { data, success, error } }) => {
+        if (success) {
+          setAttempted(event.target.value);
+          bookmarkOrAttempt(event.target.value, bookmark);
+        }
+      })
+      .catch((err) => {});
+  }
+
+  async function handleBookmark() {
+    await Requests.bookmark({
+      questionId: details.questionId,
+      contestId: id,
+      bookmark: !bookmark,
+      userId: props?.userData?._id,
+    })
+      .then(({ data: { success, data, error } }) => {
+        if (success)
+          setBookmark((initial) => {
+            bookmarkOrAttempt(attempted, !initial);
+            return !initial;
+          });
+      })
+      .catch(() => {});
   }
 
   function bookmarkOrAttempt(attempted, bookmark) {
@@ -37,9 +82,8 @@ function QuestionCard({ details, ...props }) {
   return (
     <Card className="m-0 w-full" title={`Q${1}. ${question.title}`}>
       <Radio.Group
-        onChange={(event) => {
-          setAttempted(event.target.value);
-          bookmarkOrAttempt(event.target.value, bookmark);
+        onChange={async (event) => {
+          await handleAttempted(event);
         }}
         value={attempted}
         className="w-full mb-4"
@@ -52,11 +96,8 @@ function QuestionCard({ details, ...props }) {
       </Radio.Group>
       <div className=" float-right space-x-2">
         <Button
-          onClick={() => {
-            setBookmark((initial) => {
-              bookmarkOrAttempt(attempted, !initial);
-              return !initial;
-            });
+          onClick={async () => {
+            await handleBookmark();
           }}
           type={"primary"}
           className=" bg-sky-500"
@@ -76,7 +117,10 @@ function QuestionCard({ details, ...props }) {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    userData: state.userData,
+    registeredEvents: state.registeredEvents,
+  };
 }
 
 function mapDispatchToProps(dispatch) {

@@ -42,3 +42,21 @@ export const enterContest = (userId, contestId) => {
 export const getQuestionById = (questionId) => {
   return backend.get(`/question/${questionId}`);
 };
+
+export const bookmark = ({ questionId, userId, contestId, bookmark }) => {
+  return backend.put("/participant/bookmark", {
+    questionId,
+    userId,
+    contestId,
+    bookmark,
+  });
+};
+
+export const attempted = ({ questionId, attempted, userId, contestId }) => {
+  return backend.put("/participant/attempted", {
+    questionId,
+    attempted,
+    userId,
+    contestId,
+  });
+};
