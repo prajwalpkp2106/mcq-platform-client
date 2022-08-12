@@ -5,7 +5,6 @@ import {
   REGISTEREDEVENTS,
   STARTLOADING,
   STOPLOADING,
-  USERSUBMISSION,
 } from "./actions";
 
 const initialState = {

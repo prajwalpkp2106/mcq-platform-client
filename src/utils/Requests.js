@@ -19,8 +19,8 @@ export const getAllContests = () => {
   return backend.get("/contest/");
 };
 
-export const getInstructions = () => {
-  return backend.get("/instruction/id");
+export const getInstructions = (id) => {
+  return backend.get("/instruction/" + id);
 };
 
 export const getQuestions = () => {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, Spin, Alert } from "antd";
+// import { Card, Button, Spin, Alert } from "antd";
+import { Spin } from "antd";
 
 import { connect } from "react-redux";
 import { Requests } from "../../utils";

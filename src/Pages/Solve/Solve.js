@@ -9,10 +9,11 @@ import Loader from "../../Components/Loader/Loader";
 
 const Solve = () => {
   // const { id } = useParams();
-  const [questions, setQuestions] = useState([]);
+  // const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
+  if (1 < 0) setLoading();
   const [currquestion, setCurrquestion] = useState(1);
-  let permit = false;
+  // let permit = false;
   // useEffect(()=>{
   //     setLoading(true);
   //     getQuestions()
@@ -37,7 +38,7 @@ const Solve = () => {
                 
                 // current question
                 ${
-                  currquestion == index + 1
+                  currquestion === index + 1
                     ? " bg-yellow-500 "
                     : // solved
                     false
@@ -57,16 +58,16 @@ const Solve = () => {
     );
   }
 
-  function optionClicked(question) {
-    console.log("option chooses send ");
-  }
-  const Bookmarked = () => {
-    // set bookmarked state of que to true;
-  };
-  const savenext = () => {
-    //send request to backend to save current que ans and the  next
-    setCurrquestion(currquestion + 1);
-  };
+  // function optionClicked(question) {
+  //   console.log("option chooses send ");
+  // }
+  // const Bookmarked = () => {
+  //   // set bookmarked state of que to true;
+  // };
+  // const savenext = () => {
+  //   //send request to backend to save current que ans and the  next
+  //   setCurrquestion(currquestion + 1);
+  // };
 
   const { sm } = useBreakpoint(); // lg is one of the elements returned if screenwidth exceeds 991
   return (
