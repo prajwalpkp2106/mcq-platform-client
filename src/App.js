@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import "./App.less";
 // import "antd/dist/antd.min.css"
 import "antd/dist/antd.css";
@@ -24,7 +24,7 @@ import { Spin } from "antd";
 
 function App(props) {
   useEffect(() => {
-    props.startLoading();
+    props.startLoading("Please wait while we log you in");
     const token = localStorage.getItem("xenia-mcq");
     if (token) {
       Requests.getUserByToken(token)
@@ -47,18 +47,24 @@ function App(props) {
         .catch((err) => {
           props.stopLoading();
         });
+    } else {
+      props.stopLoading();
     }
   }, []);
 
   return (
-    <Spin spinning={props.loading}>
+    <Spin spinning={props.loading} tip={props.loadingMessage}>
       <div className="app">
         <div className="overlay">
           <Header />
           <Routes>
-            <Route path=":id/instructions" element={<Instructions />}></Route>
-            <Route path=":id/solve" element={<Questions />}></Route>
-            <Route path="/contests" element={<Contest />}></Route>
+            {props.isAuthenticated && (
+              <>
+                <Route path=":id/solve" element={<Questions />}></Route>
+                <Route path=":id/instructions" element={<Instructions />} />
+                <Route path="/contests" element={<Contest />} />
+              </>
+            )}
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />}></Route>
             <Route path="*" element={<NotFound />}></Route>
@@ -81,15 +87,17 @@ function App(props) {
 
 const mapStateToProps = (state) => {
   return {
+    isAuthenticated: state.isAuthenticated,
     isLoggedIn: state.loggedIn,
     loading: state.loading,
+    loadingMessage: state.loadingMessage,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     setRegisteredEvents: (data) => dispatch(setRegisteredEvents(data)),
     login: (data) => dispatch(login(data)),
-    startLoading: () => dispatch(startLoading()),
+    startLoading: (message) => dispatch(startLoading(message)),
     stopLoading: () => dispatch(stopLoading()),
   };
 };

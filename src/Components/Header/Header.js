@@ -37,12 +37,7 @@ const Header = (props) => {
             type="button"
             onClick={() => setNavbarOpen(!navbarOpen)}
           >
-            <i
-              className={
-                (props.transparent ? "text-white" : "text-gray-50") +
-                "fas fa-bars"
-              }
-            ></i>
+            <i className={`fas fa-bars`}></i>
           </button>
         </div>
         <div
@@ -53,12 +48,12 @@ const Header = (props) => {
           id="example-navbar-warning"
         >
           {props.isAuthenticated ? (
-            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto my-auto text-white">
               <li className="nav-item">
                 <Link
                   to={`/`}
                   onClick={() => setNavbarOpen(!navbarOpen)}
-                  className="px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold hover:text-cyan-300"
+                  className="px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold hover:text-cyan-300 text-white"
                 >
                   <span className="hide-sm">Home</span>
                 </Link>
@@ -68,7 +63,7 @@ const Header = (props) => {
                   to={`/contests`}
                   onClick={() => setNavbarOpen(!navbarOpen)}
                   className={
-                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold hover:text-cyan-300"
+                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold hover:text-cyan-300 text-white"
                   }
                 >
                   <span className="hide-sm">DashBoard</span>
@@ -79,7 +74,7 @@ const Header = (props) => {
                   onClick={logout}
                   to="/"
                   replace
-                  className=" px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold hover:text-cyan-300"
+                  className=" px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold hover:text-cyan-300 text-white"
                 >
                   <i className="fas fa-sign-out-alt"></i>
                   <span className="hide-sm"> &nbsp;Logout</span>

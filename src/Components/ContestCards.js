@@ -3,20 +3,16 @@ import Countdown from "./Countdown";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { Requests } from "../utils";
 
 function ContestCards({ contest, ...props }) {
   const [registered, setRegistered] = useState(false);
 
   useEffect(() => {
-    function checkIfRegistered(contestId) {
-      const list = props.registeredEvents.filter(
-        (event) => event.contestId == contestId
-      );
-
-      list.length > 0 && setRegistered(true);
-    }
-
-    checkIfRegistered(contest._id);
+    contest._id &&
+      props.registeredEvents.forEach((event) => {
+        if (event.contestId == contest._id) setRegistered(true);
+      });
   }, []);
 
   return (
@@ -114,7 +110,7 @@ function ContestCards({ contest, ...props }) {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.isAuthenticated,
-    registeredEvents: state.registeredEvents,
+    userData: state.userData,
   };
 };
 

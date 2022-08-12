@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const backend = axios.create({
-  baseURL: `https://xenia-mcq-22.herokuapp.com/api`,
+  // baseURL: `https://xenia-mcq-22.herokuapp.com/api`,
+  baseURL: `http://localhost:4000/api`,
 });
 
 export const login = (data) => {
@@ -28,4 +29,12 @@ export const getQuestions = () => {
 
 export const getUserParticipations = (userId) => {
   return backend.get("/participant/user/" + userId);
+};
+
+export const checkIfUserRegisteredForContest = (userId, contestId) => {
+  return backend.get(`/participant/${userId}/${contestId}`);
+};
+
+export const enterContest = (userId, contestId) => {
+  return backend.post(`/participant/entercontest/${contestId}/${userId}`);
 };

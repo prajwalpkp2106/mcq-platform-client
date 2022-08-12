@@ -1,33 +1,11 @@
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  HourglassOutlined,
-} from "@ant-design/icons";
+import { HourglassOutlined } from "@ant-design/icons";
 import "../../App.less";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
-import { Col, Grid, Radio, Row, Steps } from "antd";
-import { Layout, Card, Button, Space } from "antd";
+import { Col, Radio, Row } from "antd";
+import { Card, Button, Space } from "antd";
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import Option from "../../Components/Option";
 import Loader from "../../Components/Loader/Loader";
-import { getQuestions } from "../../utils/Requests";
-const { Header, Sider, Content } = Layout;
-const { Step } = Steps;
-
-var que = [
-  {
-    number: "1",
-    statment:
-      "Which of the following can be considered as the correct syntax for declaring an array  of pointers of integers that has a size of 10 in C++ ?",
-    options: ["option 1", "option 2", "option 3", "opttion 4"],
-  },
-  {
-    number: "2",
-    statment: "Which of the following can be considered as the c?",
-    options: ["cpp", "java", "node", "python"],
-  },
-];
 
 const Solve = () => {
   // const { id } = useParams();

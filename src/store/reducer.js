@@ -1,4 +1,5 @@
 import {
+  ENTERCONTEST,
   LOGIN,
   LOGOUT,
   REGISTEREDEVENTS,
@@ -13,6 +14,7 @@ const initialState = {
   userData: {},
   registeredEvents: [],
   loading: false,
+  loadingMessage: "Loading...",
 };
 
 export default function auth(state = initialState, action) {
@@ -44,6 +46,7 @@ export default function auth(state = initialState, action) {
     case STARTLOADING: {
       return {
         ...state,
+        loadingMessage: payload,
         loading: true,
       };
     }
@@ -51,6 +54,19 @@ export default function auth(state = initialState, action) {
       return {
         ...state,
         loading: false,
+        loadingMessage: initialState.loadingMessage,
+      };
+    }
+    case ENTERCONTEST: {
+      state.registeredEvents = state.registeredEvents.map((event) => {
+        if (event._id == payload._id) {
+          return payload;
+        }
+        return event;
+      });
+
+      return {
+        ...state,
       };
     }
     default:
