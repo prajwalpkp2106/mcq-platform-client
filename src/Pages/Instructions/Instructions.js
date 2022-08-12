@@ -1,7 +1,8 @@
 import { Button, Layout, List, Typography } from "antd";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Requests } from "../../utils";
 const { Header, Footer, Sider, Content } = Layout;
 
 const dummyData = [
@@ -23,18 +24,20 @@ const dummyData = [
 
 const Instructions = () => {
   const { id } = useParams();
-  const [data, setData] = useState(dummyData);
+  console.log(id);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  // useEffect(()=>{
-  //     setLoading(true);
-  //     getInstructions()
-  //     .then((res)=>{
-  //         setData(res);
-  //         setLoading(false);
-  //     })
-  //     .catch((error)=>{})
+  useEffect(()=>{
+      setLoading(true);
+      Requests.getInstructions(id)
+      .then((res)=>{
+          console.log(res);
+          setData(res);
+          setLoading(false);
+      })
+      .catch((error)=>{})
 
-  // },[]);
+  },[]);
   return (
     <>
       <Layout
@@ -47,8 +50,8 @@ const Instructions = () => {
         <Content style={{ textAlign: "center" }}>
           <h1 className="text-4xl xl:my-4">Instructions</h1>
           <ol style={{ textAlign: "left", fontSize: "1.2rem" }} className = "px-8 xl:px-16 xl:py-4 list-decimal">
-            {data.map((ti) => (
-              <li className="text-sm xl:my-4">{ti}</li>
+            {data.map((ti, i) => (
+              <li key={`li${i}`} className="text-sm xl:my-4">{ti}</li>
             ))}
           </ol>
           <Footer>
