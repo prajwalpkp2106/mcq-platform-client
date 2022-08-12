@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const backend = axios.create({
-  // baseURL: `https://xenia-mcq-22.herokuapp.com/api`,
-  baseURL: `http://localhost:4000/api`,
+  baseURL: `https://xenia-mcq-22.herokuapp.com/api`,
+  // baseURL: `http://localhost:4000/api`,
 });
 
 export const login = (data) => {
@@ -56,6 +56,14 @@ export const attempted = ({ questionId, attempted, userId, contestId }) => {
   return backend.put("/participant/attempted", {
     questionId,
     attempted,
+    userId,
+    contestId,
+  });
+};
+
+export const clearAttempted = ({ questionId, userId, contestId }) => {
+  return backend.put("/participant/clearattempted", {
+    questionId,
     userId,
     contestId,
   });
