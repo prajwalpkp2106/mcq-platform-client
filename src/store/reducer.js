@@ -1,4 +1,6 @@
 import {
+  BOOKMARKORATTEMP,
+  ENTERCONTEST,
   LOGIN,
   LOGOUT,
   REGISTEREDEVENTS,
@@ -12,6 +14,7 @@ const initialState = {
   userData: {},
   registeredEvents: [],
   loading: false,
+  loadingMessage: "Loading...",
 };
 
 export default function auth(state = initialState, action) {
@@ -43,6 +46,7 @@ export default function auth(state = initialState, action) {
     case STARTLOADING: {
       return {
         ...state,
+        loadingMessage: payload,
         loading: true,
       };
     }
@@ -50,6 +54,38 @@ export default function auth(state = initialState, action) {
       return {
         ...state,
         loading: false,
+        loadingMessage: initialState.loadingMessage,
+      };
+    }
+    case ENTERCONTEST: {
+      state.registeredEvents = state.registeredEvents.map((event) => {
+        if (event.contestId == payload.contestId) {
+          return payload;
+        }
+        return event;
+      });
+
+      return {
+        ...state,
+      };
+    }
+    case BOOKMARKORATTEMP: {
+      state.registeredEvents = state.registeredEvents.filter((contest) => {
+        if (contest.contestId === payload.contestId) {
+          contest.questions = contest.questions?.map((question) => {
+            if (question.questionId === payload.questionId) {
+              console.log("Match found for questionId");
+              question.bookmark = payload.bookmark;
+              question.attempted = payload.attempted;
+            }
+            return question;
+          });
+        }
+        return contest;
+      });
+
+      return {
+        ...state,
       };
     }
     default:

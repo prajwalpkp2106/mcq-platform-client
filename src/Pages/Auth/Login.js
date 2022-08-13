@@ -8,6 +8,7 @@ import * as Requests from "../../utils/Requests";
 import { Formik, Field } from "formik";
 import { login, startLoading, stopLoading } from "../../store/actions";
 import { Navigate } from "react-router-dom";
+
 const Login = (props) => {
   const [error, setError] = useState(null);
 
@@ -31,12 +32,17 @@ const Login = (props) => {
           setError(null);
           Requests.login(values)
             .then((res) => {
-              localStorage.setItem("xenia-mcq", res.data.data.token);
-              props.login(res.data.data);
+              res = res.data;
+              if (res.success) {
+                localStorage.setItem("xenia-mcq", res.data.token);
+                props.login(res.data);
+              } else {
+                setError(res.error);
+              }
               props.stopLoading();
             })
             .catch((err) => {
-              setError(err.response.data.msg);
+              console.log(err);
               props.stopLoading();
             });
         }}

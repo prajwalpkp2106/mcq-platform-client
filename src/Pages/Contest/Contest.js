@@ -27,7 +27,12 @@ const Contest = (props) => {
     <Spin className=" min-h-screen" spinning={loading}>
       <div className="w-full md:w-10/12 mx-auto p-2 md:p-4 grid md:grid-cols-2 items-center xl:grid-cols-3 gap-5 content-center">
         {data.map((contest) => {
-          return <ContestCards contest={contest}></ContestCards>;
+          return (
+            <ContestCards
+              registeredEvents={props.registeredEvents}
+              contest={contest}
+            ></ContestCards>
+          );
         })}
       </div>
     </Spin>
