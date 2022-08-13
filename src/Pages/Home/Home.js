@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -9,6 +9,7 @@ export default function Home() {
           <img
             className=" w-80 md:w-[300px] mx-auto"
             src="https://www.pictcsi.com/assets/CSI%20Logo%20Nav.png"
+            alt="pict logo"
           ></img>
         </div>
         <div className="text-6xl tracking-widest text-white font-extralight">
