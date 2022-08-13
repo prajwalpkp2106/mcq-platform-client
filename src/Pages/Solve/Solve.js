@@ -81,7 +81,6 @@ const Solve = (props) => {
             <Countdown seconds={contestDetails?.status?.time} />
           )}
         </div>
-        {/* {JSON.stringify(contestDetails.status.time)} */}
         <Button className=" border border-green-500 hover:border-green-500 hover:bg-green-500 hover:text-white text-base text-green-500 p-0 px-6 h-auto">
           Submit
         </Button>

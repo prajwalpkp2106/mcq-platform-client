@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const backend = axios.create({
-  // baseURL: `https://xenia-mcq-22.herokuapp.com/api`,
-  baseURL: `http://localhost:4000/api`,
+  baseURL: `https://xenia-mcq-22.herokuapp.com/api`,
+  // baseURL: `http://localhost:4000/api`,
 });
 
 export const login = (data) => {
