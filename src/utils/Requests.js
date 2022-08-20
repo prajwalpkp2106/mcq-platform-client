@@ -81,3 +81,7 @@ export const clearAttempted = ({ questionId, userId, contestId }) => {
     contestId,
   });
 };
+
+export const submitTest = ({ contestId, userId }) => {
+  return backend.put("/participant/submit", { contestId, userId });
+};

@@ -5,7 +5,7 @@ import { Card, Button, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { startLoading, stopLoading } from "../../store/actions";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import QuestionCard from "../../Components/QuestionCard";
 import Countdown from "../../Components/Countdown";
 import { Requests } from "../../utils";
@@ -22,6 +22,22 @@ const Solve = (props) => {
         setQuestions(element.questions);
       }
     });
+  }
+
+  const navigate = useNavigate();
+
+  function handleSubmit() {
+    Requests.submitTest({ contestId: id, userId: props.userData._id })
+      .then((res) => {
+        res = res.data;
+        if (res.success) {
+          navigate("/");
+        } else alert(res.error);
+      })
+      .catch((err) => {
+        alert("err: " + err);
+        console.log(err);
+      });
   }
 
   useEffect(() => {
@@ -81,7 +97,10 @@ const Solve = (props) => {
             <Countdown seconds={contestDetails?.status?.time} />
           )}
         </div>
-        <Button className=" border border-green-500 hover:border-green-500 hover:bg-green-500 hover:text-white text-base text-green-500 p-0 px-6 h-auto">
+        <Button
+          onClick={handleSubmit}
+          className=" border border-green-500 hover:border-green-500 hover:bg-green-500 hover:text-white text-base text-green-500 p-0 px-6 h-auto"
+        >
           Submit
         </Button>
       </div>
@@ -137,6 +156,7 @@ const CommandPalleteDescription = () => {
 
 function mapStateToProps(state) {
   return {
+    userData: state.userData,
     registeredEvents: state.registeredEvents,
   };
 }
