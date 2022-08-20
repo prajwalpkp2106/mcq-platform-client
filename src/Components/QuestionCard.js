@@ -105,7 +105,10 @@ function QuestionCard({ details, ...props }) {
 
   return (
     <Spin spinning={loading} tip={"Processing..."}>
-      <Card className="m-0 w-full" title={`Q${1}. ${question.title}`}>
+      <Card
+        className="m-0 w-full"
+        title={`Q${props.questionNumber + 1}. ${question.title}`}
+      >
         <Radio.Group
           onChange={async (event) => {
             await handleAttempted(event);

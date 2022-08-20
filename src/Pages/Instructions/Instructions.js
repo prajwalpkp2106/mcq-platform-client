@@ -83,7 +83,7 @@ const Instructions = (props) => {
             ))}
           </ol>
           <Footer>
-            <Link to="/:id/solve">
+            <Link to={`/${id}/solve`}>
               <Button type="primary" size="large">
                 Next
               </Button>

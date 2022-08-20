@@ -94,7 +94,10 @@ const Solve = (props) => {
         </Col>
         <Col span={sm ? 18 : 24} className="space-y-2">
           <div className="text-lg">Question Description</div>
-          <QuestionCard details={questions[currquestion]}></QuestionCard>
+          <QuestionCard
+            details={questions[currquestion]}
+            questionNumber={currquestion}
+          ></QuestionCard>
           <Button
             onClick={() => setCurrquestion(currquestion - 1)}
             disabled={currquestion == 0}
