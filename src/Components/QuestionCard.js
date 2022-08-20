@@ -38,7 +38,7 @@ function QuestionCard({ details, ...props }) {
 
   async function clearResponse() {
     setLoading(true);
-    Requests.attempted({
+    Requests.clearAttempted({
       questionId: details.questionId,
       contestId: id,
       userId: props?.userData?._id,
