@@ -15,6 +15,7 @@ const initialState = {
   registeredEvents: [],
   loading: false,
   loadingMessage: "Loading...",
+  testing: true,
 };
 
 export default function auth(state = initialState, action) {

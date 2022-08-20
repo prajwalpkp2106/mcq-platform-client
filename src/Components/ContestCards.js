@@ -20,7 +20,11 @@ function ContestCards({ contest, ...props }) {
       title={
         <div className="space-y-4">
           <div className="w-full">
-            <img className="h-[150px] mx-auto my-2" alt="contest logo" src={contest.logo}></img>
+            <img
+              className="h-[150px] mx-auto my-2"
+              alt="contest logo"
+              src={contest.logo}
+            ></img>
           </div>
           <div className=" font-bolds tracking-wider text-lg">
             {contest.title}
@@ -76,7 +80,12 @@ function ContestCards({ contest, ...props }) {
                 ></Alert>
                 <div className=" space-x-2">
                   <a
-                    href="https://pcsbxenia.com/"
+                    href={
+                      props.testing
+                        ? "https://xenia-mcq.netlify.app/test/register/" +
+                          contest._id
+                        : "https://pcsbxenia.com/"
+                    }
                     rel="noreferrer"
                     target="_blank"
                   >
@@ -111,6 +120,7 @@ const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.isAuthenticated,
     userData: state.userData,
+    testing: state.testing,
   };
 };
 

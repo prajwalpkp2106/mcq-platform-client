@@ -21,6 +21,7 @@ import { useEffect } from "react";
 import NotFound from "./Pages/404/404";
 import { Requests } from "./utils";
 import { Spin } from "antd";
+import TestRegister from "./Pages/Testing/TestRegister";
 
 function App(props) {
   useEffect(() => {
@@ -67,6 +68,10 @@ function App(props) {
             )}
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />}></Route>
+            <Route
+              path="/test/register/:eventId"
+              element={<TestRegister></TestRegister>}
+            ></Route>
             <Route path="*" element={<NotFound />}></Route>
           </Routes>
 
@@ -91,6 +96,7 @@ const mapStateToProps = (state) => {
     isLoggedIn: state.loggedIn,
     loading: state.loading,
     loadingMessage: state.loadingMessage,
+    testing: state.testing,
   };
 };
 const mapDispatchToProps = (dispatch) => {
