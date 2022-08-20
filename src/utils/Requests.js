@@ -65,6 +65,15 @@ export const attempted = ({ questionId, attempted, userId, contestId }) => {
   });
 };
 
+export const generateUser = ({ name, email, eventName, mobile }) => {
+  return backend.post("/auth/generate-user", {
+    name,
+    email,
+    eventName,
+    mobile,
+  });
+};
+
 export const clearAttempted = ({ questionId, userId, contestId }) => {
   return backend.put("/participant/clearattempted", {
     questionId,

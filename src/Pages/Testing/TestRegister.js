@@ -2,18 +2,27 @@ import { Button, Card } from "antd";
 import { Field, Formik } from "formik";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { connect } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { startLoading, stopLoading } from "../../store/actions";
 import { Requests } from "../../utils";
-
-export default function TestRegister() {
+function TestRegister(props) {
   const { eventId } = useParams();
   const [data, setData] = useState({});
 
   useEffect(() => {
-    Requests.getContestById(eventId).then((res) => {
-      console.log(res.data);
-    });
+    props.startLoading("Getting Event Details");
+    Requests.getContestById(eventId)
+      .then((res) => {
+        setData(res.data.data);
+        props.stopLoading();
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }, []);
+
+  const navigate = useNavigate();
 
   return (
     <div className="">
@@ -21,8 +30,17 @@ export default function TestRegister() {
         initialValues={{
           email: "",
           name: "",
-          eventName: "",
+          eventName: data.title,
           mobile: "",
+        }}
+        onSubmit={(values) => {
+          props.startLoading("Requesting");
+          values = { ...values, eventName: data.title };
+          Requests.generateUser(values).then((res) => {
+            alert(res.data.data);
+            navigate("/");
+            props.stopLoading();
+          });
         }}
       >
         {(formik) => {
@@ -32,23 +50,28 @@ export default function TestRegister() {
                 <div className="flex flex-col space-y-2 mx-auto p-4 bg-gray-50">
                   <Field
                     name="email"
-                    placeHolder="E-Mail"
+                    placeholder="E-Mail"
                     onChange={formik.handleChange}
                     className="p-2"
                   ></Field>
                   <Field
                     name="name"
-                    placeHolder="Name"
+                    placeholder="Name"
                     onChange={formik.handleChange}
                     className="p-2"
                   ></Field>
                   <Field
-                    name="eventName"
-                    placeHolder="Event Name"
-                    value={data.name}
+                    name="mobile"
+                    placeholder="Mobile"
+                    onChange={formik.handleChange}
                     className="p-2"
+                    type="number"
                   ></Field>
-                  <Button>Submit</Button>
+                  <div>
+                    <span>Event Name: </span>
+                    {data.title}
+                  </div>
+                  <Button onClick={formik.handleSubmit}>Submit</Button>
                 </div>
               </Card>
             </div>
@@ -58,3 +81,16 @@ export default function TestRegister() {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return { ...state };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    startLoading: (msg) => dispatch(startLoading(msg)),
+    stopLoading: () => dispatch(stopLoading()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TestRegister);
