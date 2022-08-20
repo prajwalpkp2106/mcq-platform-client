@@ -82,7 +82,7 @@ function ContestCards({ contest, ...props }) {
                   <a
                     href={
                       props.testing
-                        ? "http://localhost:3000/test/register/" + contest._id
+                        ? "https://xenia-mcq.netlify.app/test/register/" + contest._id
                         : "https://pcsbxenia.com/"
                     }
                     rel="noreferrer"
