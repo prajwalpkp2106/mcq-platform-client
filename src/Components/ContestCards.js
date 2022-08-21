@@ -11,7 +11,8 @@ function ContestCards({ contest, ...props }) {
   useEffect(() => {
     contest._id &&
       props.registeredEvents.forEach((event) => {
-        if (event.contestId == contest._id) setRegistered(true);
+        console.log(event);
+        if (event.contestId == contest._id) setRegistered(event);
       });
   }, []);
 
@@ -59,15 +60,19 @@ function ContestCards({ contest, ...props }) {
           <div className=" space-y-2">
             {registered ? (
               contest.status.description === "RUNNING" ? (
-                <Link to={`/${contest._id}/instructions`}>
-                  <Button
-                    type="primary"
-                    className=" bg-sky-500"
-                    disabled={!contest.status.time}
-                  >
-                    Enter Contest
-                  </Button>
-                </Link>
+                registered?.timeTaken ? (
+                  <div className="text-green-500 text-lg">Test Submitted</div>
+                ) : (
+                  <Link to={`/${contest._id}/instructions`}>
+                    <Button
+                      type="primary"
+                      className=" bg-sky-500"
+                      disabled={!contest.status.time}
+                    >
+                      Enter Contest
+                    </Button>
+                  </Link>
+                )
               ) : (
                 <div className="text-green-500">Registered Successfully</div>
               )
@@ -82,7 +87,8 @@ function ContestCards({ contest, ...props }) {
                   <a
                     href={
                       props.testing
-                        ? "https://xenia-mcq.netlify.app/test/register/" + contest._id
+                        ? "https://xenia-mcq.netlify.app/test/register/" +
+                          contest._id
                         : "https://pcsbxenia.com/"
                     }
                     rel="noreferrer"
