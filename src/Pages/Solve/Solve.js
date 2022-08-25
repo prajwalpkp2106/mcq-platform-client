@@ -32,6 +32,7 @@ const Solve = (props) => {
         res = res.data;
         if (res.success) {
           navigate("/");
+          window.location.reload();
         } else alert(res.error);
       })
       .catch((err) => {

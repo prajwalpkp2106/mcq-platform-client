@@ -106,12 +106,12 @@ function QuestionCard({ details, ...props }) {
   return (
     <Spin spinning={loading} tip={"Processing..."}>
       <Card
-        className="m-0 w-full"
+        className="m-0"
         title={
-          <div>
-            <div className="mb-2">{`Q${props.questionNumber + 1}. ${
-              question.title
-            }`}</div>
+          <div className="">
+            <p className="mb-2 overflow-auto h-auto whitespace-pre-line">{`Q ${
+              props.questionNumber + 1
+            }. ${question.title}`}</p>
             {question?.imageLinks?.length > 0 && (
               <div className="grid gap-2">
                 {question?.imageLinks?.map((link) => {
