@@ -107,7 +107,25 @@ function QuestionCard({ details, ...props }) {
     <Spin spinning={loading} tip={"Processing..."}>
       <Card
         className="m-0 w-full"
-        title={`Q${props.questionNumber + 1}. ${question.title}`}
+        title={
+          <div>
+            <div className="mb-2">{`Q${props.questionNumber + 1}. ${
+              question.title
+            }`}</div>
+            {question?.imageLinks?.length > 0 && (
+              <div className="grid gap-2">
+                {question?.imageLinks?.map((link) => {
+                  return (
+                    <img
+                      src={link}
+                      className="max-h-[400px] max-w-full inline-block"
+                    ></img>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        }
       >
         <Radio.Group
           onChange={async (event) => {
