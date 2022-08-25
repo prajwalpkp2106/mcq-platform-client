@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { enterContest, startLoading, stopLoading } from "../../store/actions";
 import { connect } from "react-redux";
 import { Requests } from "../../utils";
+import Countdown from "../../Components/Countdown";
 const { Footer, Content } = Layout;
 
 const dummyData = [];
@@ -12,6 +13,7 @@ const dummyData = [];
 const Instructions = (props) => {
   const { id } = useParams();
   const [data, setData] = useState(dummyData);
+  const [contestData, setContestData] = useState({});
 
   const navigate = useNavigate();
 
@@ -44,6 +46,12 @@ const Instructions = (props) => {
           }
         }
       );
+      Requests.getContestById(id).then((res) => {
+        res = res?.data;
+        if (res?.success) {
+          setContestData(res?.data);
+        }
+      });
     }
     props.stopLoading();
   }, []);
@@ -53,12 +61,20 @@ const Instructions = (props) => {
       <Layout
         style={{
           height: "90vh",
-          border: "6px solid #190959 ",
           overflow: "auto",
         }}
       >
-        <Content style={{ textAlign: "center" }}>
-          <h1 className="text-4xl xl:my-4">Start when you are ready!</h1>
+        <Content className="flex justify-center items-center flex-col">
+          <h1 className="text-4xl xl:my-4">
+            {contestData?.status?.description == "NOTSTARTED" ? (
+              <div className="space-y-2">
+                <span>"Contest will start in"</span>
+                <Countdown seconds={contestData?.status?.time}></Countdown>
+              </div>
+            ) : (
+              "Start When you are ready"
+            )}
+          </h1>
           <ol
             style={{ textAlign: "left", fontSize: "1.2rem" }}
             className="px-8 xl:px-16 xl:py-4 list-decimal"
@@ -68,11 +84,13 @@ const Instructions = (props) => {
             ))}
           </ol>
           <Footer>
-            <Link to={`/${id}/solve`}>
-              <Button type="success" size="large" className="text-black">
-                Next
-              </Button>
-            </Link>
+            {contestData?.status?.description == "RUNNING" && (
+              <Link to={`/${id}/solve`}>
+                <Button type="success" size="large" className="text-black">
+                  Next
+                </Button>
+              </Link>
+            )}
           </Footer>
         </Content>
       </Layout>

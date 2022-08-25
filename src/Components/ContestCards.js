@@ -11,7 +11,6 @@ function ContestCards({ contest, ...props }) {
   useEffect(() => {
     contest._id &&
       props.registeredEvents.forEach((event) => {
-        console.log(event);
         if (event.contestId == contest._id) setRegistered(event);
       });
   }, []);
