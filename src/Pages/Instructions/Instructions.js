@@ -7,22 +7,7 @@ import { connect } from "react-redux";
 import { Requests } from "../../utils";
 const { Footer, Content } = Layout;
 
-const dummyData = [
-  "Instruction1Instruction1Instruction1Instruction1Instruction1Instruction1Instruction1Instruction1",
-  "Instruction2Instruction2Instruction2Instruction2Instruction2Instruction2Instruction2Instruction2Instruction2",
-  "Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3",
-  "Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3",
-  "Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3",
-  "Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3",
-  "Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3",
-  "Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3",
-  "Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3",
-  "Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3",
-  "Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3",
-  "Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3",
-  "Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3",
-  "Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3Instruction3",
-];
+const dummyData = [];
 
 const Instructions = (props) => {
   const { id } = useParams();
@@ -73,7 +58,7 @@ const Instructions = (props) => {
         }}
       >
         <Content style={{ textAlign: "center" }}>
-          <h1 className="text-4xl xl:my-4">Instructions</h1>
+          <h1 className="text-4xl xl:my-4">Start when you are ready!</h1>
           <ol
             style={{ textAlign: "left", fontSize: "1.2rem" }}
             className="px-8 xl:px-16 xl:py-4 list-decimal"
@@ -84,7 +69,7 @@ const Instructions = (props) => {
           </ol>
           <Footer>
             <Link to={`/${id}/solve`}>
-              <Button type="primary" size="large">
+              <Button type="success" size="large" className="text-black">
                 Next
               </Button>
             </Link>

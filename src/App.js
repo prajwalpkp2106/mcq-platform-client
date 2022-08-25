@@ -22,6 +22,7 @@ import NotFound from "./Pages/404/404";
 import { Requests } from "./utils";
 import { Spin } from "antd";
 import TestRegister from "./Pages/Testing/TestRegister";
+import Admin from "./Pages/Admin/Admin";
 
 function App(props) {
   useEffect(() => {
@@ -72,6 +73,7 @@ function App(props) {
               </>
             )}
             <Route path="/login" element={<Login />} />
+            <Route path="/admin2022/*" element={<Admin></Admin>} ></Route>
             <Route path="/" element={<Home />}></Route>
             <Route
               path="/test/register/:eventId"

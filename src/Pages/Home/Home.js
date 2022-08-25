@@ -15,14 +15,14 @@ export default function Home() {
         <div className="text-6xl tracking-widest text-white font-extralight">
           MCQ Platform
         </div>
-        <div className="grid grid-cols-2 mx-auto gap-6 py-4">
+        {/* <div className="grid grid-cols-2 mx-auto gap-6 py-4">
           <a href="https://pcsbxenia.com/" rel="noreferrer" target="_blank">
             <div className="h-[200px] w-[300px] bg-gray-50"></div>
           </a>
           <a href="https://pcsbxenia.com/" rel="noreferrer" target="_blank">
             <div className="h-[200px] w-[300px] bg-gray-50"></div>
           </a>
-        </div>
+        </div> */}
       </div>
     </div>
   );
