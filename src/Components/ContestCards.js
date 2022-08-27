@@ -10,15 +10,18 @@ function ContestCards({ contest, ...props }) {
   const [loading, setLoading] = useState(false);
 
   async function checkParticipated() {
-    const data = { "userId": props.userData._id, "contestId": contest._id }
-    await Requests.checkIsParticipated(data).then(res => {
-      console.log("Is Participated: ", res.data.data, contest.title);
-      if (res?.data?.data) setRegistered(res?.data?.data)
-      setLoading(false);
-    }).catch(err => {
-      setLoading(false);
-      console.error(err);
-    })
+    const data = { userId: props.userData._id, contestId: contest._id };
+    await Requests.checkIsParticipated(data)
+      .then((res) => {
+        if (res.data.success) {
+          if (res?.data?.data) setRegistered(res?.data?.data);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.error(err);
+      });
   }
 
   useEffect(() => {
@@ -103,7 +106,7 @@ function ContestCards({ contest, ...props }) {
                       href={
                         props.testing
                           ? "https://xenia-mcq.netlify.app/test/register/" +
-                          contest._id
+                            contest._id
                           : "https://pcsbxenia.com/"
                       }
                       rel="noreferrer"
@@ -133,7 +136,7 @@ function ContestCards({ contest, ...props }) {
           )}
         </div>
       </Card>
-      </Spin>
+    </Spin>
   );
 }
 

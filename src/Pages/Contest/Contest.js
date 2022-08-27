@@ -7,7 +7,7 @@ import { Requests } from "../../utils";
 import ContestCards from "../../Components/ContestCards";
 
 const Contest = (props) => {
-  const [data, setData] = useState([{ status: 0, startTime: "DD/MM/YYYY" }]);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
