@@ -35,6 +35,10 @@ export const getUserParticipations = (userId) => {
   return backend.get("/participant/user/" + userId);
 };
 
+export const checkIsParticipated = (data) => {
+  return backend.post("/participant/checkParticipated", data);
+}
+
 export const checkIfUserRegisteredForContest = (userId, contestId) => {
   return backend.get(`/participant/${userId}/${contestId}`);
 };

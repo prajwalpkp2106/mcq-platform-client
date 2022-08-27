@@ -1,4 +1,4 @@
-import { Alert, Button, Card } from "antd";
+import { Alert, Button, Card, Spin } from "antd";
 import Countdown from "./Countdown";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
@@ -7,116 +7,133 @@ import { Requests } from "../utils";
 
 function ContestCards({ contest, ...props }) {
   const [registered, setRegistered] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  async function checkParticipated() {
+    const data = { "userId": props.userData._id, "contestId": contest._id }
+    await Requests.checkIsParticipated(data).then(res => {
+      console.log("Is Participated: ", res.data.data, contest.title);
+      if (res?.data?.data) setRegistered(res?.data?.data)
+      setLoading(false);
+    }).catch(err => {
+      setLoading(false);
+      console.error(err);
+    })
+  }
 
   useEffect(() => {
-    contest._id &&
-      props.registeredEvents.forEach((event) => {
-        if (event.contestId == contest._id) setRegistered(event);
-      });
+    setLoading(true);
+    checkParticipated();
+    // contest._id &&
+    // props.registeredEvents.forEach((event) => {
+    //   if (event.contestId == contest._id) setRegistered(event);
+    // });
   }, []);
 
   return (
-    <Card
-      title={
-        <div className="space-y-4">
-          <div className="w-full">
-            <img
-              className="h-[150px] mx-auto my-2"
-              alt="contest logo"
-              src={contest.logo}
-            ></img>
+    <Spin spinning={loading}>
+      <Card
+        title={
+          <div className="space-y-4">
+            <div className="w-full">
+              <img
+                className="h-[150px] mx-auto my-2"
+                alt="contest logo"
+                src={contest.logo}
+              ></img>
+            </div>
+            <div className=" font-bolds tracking-wider text-lg">
+              {contest.title}
+            </div>
           </div>
-          <div className=" font-bolds tracking-wider text-lg">
-            {contest.title}
-          </div>
-        </div>
-      }
-      className=" w-80 md:w-[400px] bg-white inline-block text-black mx-auto border-none shadow-cyan-300 min-h-[400px] hover:shadow-lg transition"
-    >
-      <div className="space-y-2 text-gray-500">
-        <div className="flex justify-between">
-          <div className="float-left">Date</div>
-          <div className=" text-right">{contest.startTime.split("T")[0]}</div>
-        </div>
-        {contest.status.time ? (
+        }
+        className=" w-80 md:w-[400px] bg-white inline-block text-black mx-auto border-none shadow-cyan-300 min-h-[400px] hover:shadow-lg transition"
+      >
+        <div className="space-y-2 text-gray-500">
           <div className="flex justify-between">
-            {contest.status.description === "RUNNING" ? (
-              <>
-                <div className="text-red-400">Ends in</div>
-                <Countdown seconds={contest.status.time}></Countdown>
-              </>
-            ) : (
-              <>
-                <div className="">Starts in</div>
-                <Countdown seconds={contest.status.time}></Countdown>
-              </>
-            )}
+            <div className="float-left">Date</div>
+            <div className=" text-right">{contest.startTime.split("T")[0]}</div>
           </div>
-        ) : (
-          <Alert message="Contest Ended" type="error" showIcon></Alert>
-        )}
-        {contest.status.time > 0 && (
-          <div className=" space-y-2">
-            {registered ? (
-              contest.status.description === "RUNNING" ? (
-                registered?.timeTaken ? (
-                  <div className="text-green-500 text-lg">Test Submitted</div>
+          {contest.status.time ? (
+            <div className="flex justify-between">
+              {contest.status.description === "RUNNING" ? (
+                <>
+                  <div className="text-red-400">Ends in</div>
+                  <Countdown seconds={contest.status.time}></Countdown>
+                </>
+              ) : (
+                <>
+                  <div className="">Starts in</div>
+                  <Countdown seconds={contest.status.time}></Countdown>
+                </>
+              )}
+            </div>
+          ) : (
+            <Alert message="Contest Ended" type="error" showIcon></Alert>
+          )}
+          {contest.status.time > 0 && (
+            <div className=" space-y-2">
+              {registered ? (
+                contest.status.description === "RUNNING" ? (
+                  registered?.timeTaken ? (
+                    <div className="text-green-500 text-lg">Test Submitted</div>
+                  ) : (
+                    <Link to={`/${contest._id}/instructions`}>
+                      <Button
+                        type="primary"
+                        className=" bg-sky-500"
+                        disabled={!contest.status.time}
+                      >
+                        Enter Contest
+                      </Button>
+                    </Link>
+                  )
                 ) : (
-                  <Link to={`/${contest._id}/instructions`}>
-                    <Button
-                      type="primary"
-                      className=" bg-sky-500"
-                      disabled={!contest.status.time}
-                    >
-                      Enter Contest
-                    </Button>
-                  </Link>
+                  <div className="text-green-500">Registered Successfully</div>
                 )
               ) : (
-                <div className="text-green-500">Registered Successfully</div>
-              )
-            ) : (
-              <>
-                <Alert
-                  type="warning"
-                  message="You have not registered for this event."
-                  showIcon
-                ></Alert>
-                <div className=" space-x-2">
-                  <a
-                    href={
-                      props.testing
-                        ? "https://xenia-mcq.netlify.app/test/register/" +
+                <>
+                  <Alert
+                    type="warning"
+                    message="You have not registered for this event."
+                    showIcon
+                  ></Alert>
+                  <div className=" space-x-2">
+                    <a
+                      href={
+                        props.testing
+                          ? "https://xenia-mcq.netlify.app/test/register/" +
                           contest._id
-                        : "https://pcsbxenia.com/"
-                    }
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    <Button
-                      type={"default"}
-                      disabled={!contest.status.time}
-                      className={"bg-green-400"}
+                          : "https://pcsbxenia.com/"
+                      }
+                      rel="noreferrer"
+                      target="_blank"
                     >
-                      Register
-                    </Button>
-                  </a>
+                      <Button
+                        type={"default"}
+                        disabled={!contest.status.time}
+                        className={"bg-green-400"}
+                      >
+                        Register
+                      </Button>
+                    </a>
 
-                  <Link to={`/${contest._id}/instructions`}>
-                    <Button
-                      type="primary"
-                      className="border-black text-black border"
-                    >
-                      Details
-                    </Button>
-                  </Link>
-                </div>
-              </>
-            )}
-          </div>
-        )}
-      </div>
-    </Card>
+                    <Link to={`/${contest._id}/instructions`}>
+                      <Button
+                        type="primary"
+                        className="border-black text-black border"
+                      >
+                        Details
+                      </Button>
+                    </Link>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+        </div>
+      </Card>
+      </Spin>
   );
 }
 

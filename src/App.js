@@ -31,7 +31,6 @@ function App(props) {
     if (token) {
       Requests.getUserByToken(token)
         .then(({ data }) => {
-          console.log(data);
           if (data.success) {
             props.login(data.data);
             // get all the registered events for this user
