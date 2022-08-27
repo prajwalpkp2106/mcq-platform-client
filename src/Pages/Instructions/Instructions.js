@@ -50,6 +50,9 @@ const Instructions = (props) => {
         res = res?.data;
         if (res?.success) {
           setContestData(res?.data);
+          if (res?.data?.status?.description != "RUNNING") {
+            navigate("/");
+          }
         }
       });
     }
