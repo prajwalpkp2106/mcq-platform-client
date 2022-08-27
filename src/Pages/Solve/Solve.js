@@ -47,6 +47,7 @@ const Solve = (props) => {
       .then(({ data: { success, data, error } }) => {
         if (success) {
           setContestDetails(data);
+          if (data?.status?.description !== "RUNNING") navigate("/");
         }
       })
       .catch((err) => {});
