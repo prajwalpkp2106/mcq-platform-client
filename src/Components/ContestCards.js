@@ -121,14 +121,14 @@ function ContestCards({ contest, ...props }) {
                       </Button>
                     </a>
 
-                    <Link to={`/${contest._id}/instructions`}>
+                    {/* <Link to={`/${contest._id}/instructions`}>
                       <Button
                         type="primary"
                         className="border-black text-black border"
                       >
                         Details
                       </Button>
-                    </Link>
+                    </Link> */}
                   </div>
                 </>
               )}
