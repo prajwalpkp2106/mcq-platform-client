@@ -5,11 +5,13 @@ import { Requests } from "../../utils";
 export default function Admin() {
   const [contests, setcontests] = useState([]);
 
+
   useEffect(() => {
     Requests.getAllContests().then((res) => {
       setcontests(res?.data?.data);
+      console.log(contests)
     });
-  }, []);
+  }, [contests]);
 
   const tabs = [
     {
@@ -53,13 +55,13 @@ export default function Admin() {
   );
 }
 
-const contestCols = [
-  {
-    title: "_id",
-    selector: (row) => row.name,
-  },
-  {
-    title: "name",
-    selector: (row) => row.name,
-  },
-];
+// const contestCols = [
+//   {
+//     title: "_id",
+//     selector: (row) => row.name,
+//   },
+//   {
+//     title: "name",
+//     selector: (row) => row.name,
+//   },
+// ];

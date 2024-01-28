@@ -1,7 +1,7 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "./App.less";
 // import "antd/dist/antd.min.css"
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css"
 import Header from "../src/Components/Header/Header";
 import Instructions from "./Pages/Instructions/Instructions";
 import Questions from "./Pages/Solve/Solve";
@@ -25,6 +25,7 @@ import TestRegister from "./Pages/Testing/TestRegister";
 import Admin from "./Pages/Admin/Admin";
 
 function App(props) {
+  // const {isAuthenticated }= props;
   useEffect(() => {
     props.startLoading("Please wait while we log you in");
     const token = localStorage.getItem("xenia-mcq");
@@ -56,6 +57,7 @@ function App(props) {
     } else {
       props.stopLoading();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.isAuthenticated]);
 
   return (

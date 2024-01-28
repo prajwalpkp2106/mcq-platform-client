@@ -1,4 +1,4 @@
-import { Button, Layout, List, Typography } from "antd";
+import { Button, Layout } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";

@@ -31,6 +31,7 @@ function ContestCards({ contest, ...props }) {
     // props.registeredEvents.forEach((event) => {
     //   if (event.contestId == contest._id) setRegistered(event);
     // });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

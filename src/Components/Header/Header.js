@@ -27,6 +27,7 @@ const Header = (props) => {
                 src={
                   "https://icons.veryicon.com/png/o/business/multi-color-financial-and-business-icons/user-139.png"
                 }
+                alt="img"
                 className="h-8 md:h-10 w-auto"
               ></img>
               <div className=" px-2">{props?.userData?.name}</div>

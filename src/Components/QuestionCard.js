@@ -25,7 +25,7 @@ function QuestionCard({ details, ...props }) {
           setLoading(false);
         });
     props.registeredEvents.forEach((event) => {
-      if (event.contestId == id) {
+      if (event.contestId === id) {
         event.questions.forEach((que) => {
           if (que.questionId === details?.questionId) {
             setBookmark(que.bookmark);
@@ -34,6 +34,7 @@ function QuestionCard({ details, ...props }) {
         });
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [details]);
 
   async function clearResponse() {
@@ -119,6 +120,7 @@ function QuestionCard({ details, ...props }) {
                     <img
                       src={link}
                       className="max-h-[400px] max-w-full inline-block"
+                      alt="img"
                     ></img>
                   );
                 })}
