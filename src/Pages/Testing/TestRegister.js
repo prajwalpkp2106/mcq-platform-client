@@ -20,6 +20,7 @@ function TestRegister(props) {
       .catch((err) => {
         alert(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const navigate = useNavigate();

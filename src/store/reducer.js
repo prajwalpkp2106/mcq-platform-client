@@ -60,7 +60,7 @@ export default function auth(state = initialState, action) {
     }
     case ENTERCONTEST: {
       state.registeredEvents = state.registeredEvents.map((event) => {
-        if (event.contestId == payload.contestId) {
+        if (event.contestId === payload.contestId) {
           return payload;
         }
         return event;

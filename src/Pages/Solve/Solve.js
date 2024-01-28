@@ -1,7 +1,7 @@
 import { HourglassOutlined } from "@ant-design/icons";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
-import { Col, Radio, Row } from "antd";
-import { Card, Button, Space } from "antd";
+import { Col, Row } from "antd";
+import {Button } from "antd";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { startLoading, stopLoading } from "../../store/actions";
@@ -53,6 +53,7 @@ const Solve = (props) => {
       .catch((err) => {});
     fetchQuestions();
     props.stopLoading();
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.registeredEvents]);
 
   function QuestionPallete() {
@@ -121,12 +122,12 @@ const Solve = (props) => {
           ></QuestionCard>
           <Button
             onClick={() => setCurrquestion(currquestion - 1)}
-            disabled={currquestion == 0}
+            disabled={currquestion === 0}
           >
             Prev
           </Button>
           <Button
-            disabled={currquestion == questions.length - 1}
+            disabled={currquestion === questions.length - 1}
             onClick={() => setCurrquestion(currquestion + 1)}
           >
             Next

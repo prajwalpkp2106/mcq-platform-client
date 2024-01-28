@@ -12,7 +12,9 @@ const dummyData = [];
 
 const Instructions = (props) => {
   const { id } = useParams();
-  const [data, setData] = useState(dummyData);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const data = dummyData;
   const [contestData, setContestData] = useState({});
 
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ const Instructions = (props) => {
 
     if (registeredEvents) {
       registeredEvents.forEach((element) => {
-        if (element.contestId == id && element.started) {
+        if (element.contestId === id && element.started) {
           entered = true;
         }
       });
@@ -50,13 +52,14 @@ const Instructions = (props) => {
         res = res?.data;
         if (res?.success) {
           setContestData(res?.data);
-          if (res?.data?.status?.description != "RUNNING") {
+          if (res?.data?.status?.description !== "RUNNING") {
             navigate("/");
           }
         }
       });
     }
     props.stopLoading();
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -69,7 +72,7 @@ const Instructions = (props) => {
       >
         <Content className="flex justify-center items-center flex-col">
           <h1 className="text-4xl xl:my-4">
-            {contestData?.status?.description == "NOTSTARTED" ? (
+            {contestData?.status?.description === "NOTSTARTED" ? (
               <div className="space-y-2">
                 <span>"Contest will start in"</span>
                 <Countdown seconds={contestData?.status?.time}></Countdown>
@@ -87,7 +90,7 @@ const Instructions = (props) => {
             ))}
           </ol>
           <Footer>
-            {contestData?.status?.description == "RUNNING" && (
+            {contestData?.status?.description === "RUNNING" && (
               <Link to={`/${id}/solve`}>
                 <Button type="success" size="large" className="text-black">
                   Next
