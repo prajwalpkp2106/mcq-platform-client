@@ -1,11 +1,12 @@
 import axios from "axios";
 
 const backend = axios.create({
-  baseURL: process.env.backendurl || "https://xenia-23-mcq-server.onrender.com",
+  baseURL: process.env.backendurl || "https://xenia-23-mcq-server.onrender.com/api",
   // baseURL: `http://localhost:4000/api`,
 });
 
 export const login = (data) => {
+  console.log(data)
   return backend.post("/auth/login", data);
 };
 
