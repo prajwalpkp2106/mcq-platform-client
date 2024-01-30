@@ -8,7 +8,7 @@ export default function Home() {
         <div>
           <img
             className=" w-80 md:w-[300px] mx-auto"
-            src="https://www.pictcsi.com/assets/CSI%20Logo%20Nav.png"
+            src="https://pictcsi.com/assets/bgCSILogo-a8e0ce5f.png"
             alt="pict logo"
           ></img>
         </div>

@@ -16,7 +16,7 @@ const Solve = (props) => {
   const [currquestion, setCurrquestion] = useState(0);
   const [contestDetails, setContestDetails] = useState({});
 
-  function fetchQuestions() {
+  async function  fetchQuestions () {
     props.registeredEvents?.forEach((element) => {
       if (element.contestId === id) {
         setQuestions(element.questions);
@@ -51,7 +51,9 @@ const Solve = (props) => {
         }
       })
       .catch((err) => {});
-    fetchQuestions();
+    fetchQuestions().then(() =>{
+      props.stopLoading();
+    });
     props.stopLoading();
      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.registeredEvents]);
