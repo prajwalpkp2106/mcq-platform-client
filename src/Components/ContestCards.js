@@ -13,8 +13,9 @@ function ContestCards({ contest, ...props }) {
     const data = { userId: props.userData._id, contestId: contest._id };
     await Requests.checkIsParticipated(data)
       .then((res) => {
+       
         if (res.data.success) {
-          if (res?.data?.data) setRegistered(res?.data?.data);
+          if (res?.data?.data) setRegistered(res?.data?.data);       
         }
         setLoading(false);
       })
@@ -25,6 +26,7 @@ function ContestCards({ contest, ...props }) {
   }
 
   useEffect(() => {
+   
     setLoading(true);
     checkParticipated();
     // contest._id &&
@@ -32,8 +34,10 @@ function ContestCards({ contest, ...props }) {
     //   if (event.contestId == contest._id) setRegistered(event);
     // });
     setLoading(false);
+   
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [registered]);
+  
+  }, []);
 
   return (
     <Spin spinning={loading}>
@@ -78,10 +82,16 @@ function ContestCards({ contest, ...props }) {
           )}
           {contest.status.time > 0 && (
             <div className=" space-y-2">
-              {registered ? (
+              {registered.participated ? (
                 contest.status.description === "RUNNING" ? (
-                  registered?.timeTaken ? (
-                    <div className="text-green-500 text-lg">Test Submitted</div>
+                  registered?.submitted ? (
+                    <Button
+                    type={"default"}
+                    disabled="true"
+                    className={"bg-green-400 green"}
+                  >
+                    Submitted
+                  </Button>
                   ) : (
                     <Link to={`/${contest._id}/instructions`}>
                       <Button

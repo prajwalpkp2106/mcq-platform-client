@@ -25,6 +25,7 @@ export const getContestById = (id) => {
 };
 
 export const getInstructions = (id) => {
+  console.log("Get instructions")
   return backend.get("/instruction/" + id);
 };
 
@@ -37,6 +38,7 @@ export const getUserParticipations = (userId) => {
 };
 
 export const checkIsParticipated = (data) => {
+
   return backend.post("/participant/checkParticipated", data);
 }
 
@@ -45,6 +47,7 @@ export const checkIfUserRegisteredForContest = (userId, contestId) => {
 };
 
 export const enterContest = (userId, contestId) => {
+ 
   return backend.post(`/participant/entercontest/${contestId}/${userId}`);
 };
 

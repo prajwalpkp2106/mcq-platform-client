@@ -18,6 +18,7 @@ const Contest = (props) => {
         if (response.success) {
           setData(response.data);
           setLoading(false);
+          
         }
       })
       .catch((error) => {});

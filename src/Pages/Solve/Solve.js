@@ -27,6 +27,10 @@ const Solve = (props) => {
   const navigate = useNavigate();
 
   function handleSubmit() {
+    const isConfirmed = window.confirm('Are you sure you want to submit the test?');
+    if (isConfirmed) {
+      // If user confirms, proceed with submitting the test
+   
     Requests.submitTest({ contestId: id, userId: props.userData._id })
       .then((res) => {
         res = res.data;
@@ -39,6 +43,8 @@ const Solve = (props) => {
         alert("err: " + err);
         console.log(err);
       });
+     
+    }
   }
 
   useEffect(() => {
@@ -51,7 +57,9 @@ const Solve = (props) => {
         }
       })
       .catch((err) => {});
+      // 
     fetchQuestions().then(() =>{
+      // to stop loading. 
       props.stopLoading();
     });
     props.stopLoading();
