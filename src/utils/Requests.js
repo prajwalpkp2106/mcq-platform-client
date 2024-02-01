@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const backend = axios.create({
-  baseURL: process.env.backendurl || "https://xenia-23-mcq-server.onrender.com/api",
+  baseURL: process.env.backendurl || "https://mcq-platform-server-production.up.railway.app/api",
   // baseURL: `http://localhost:4000/api`,
 });
 
