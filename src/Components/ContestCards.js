@@ -119,7 +119,7 @@ function ContestCards({ contest, ...props }) {
                         props.testing
                           ? "https://xenia-mcq.netlify.app/test/register/" +
                             contest._id
-                          : "https://pcsbxenia.com/"
+                          : "https://pcsbxenia.in/"
                       }
                       rel="noreferrer"
                       target="_blank"

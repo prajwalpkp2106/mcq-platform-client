@@ -8,7 +8,7 @@ export default function Home() {
         <div>
           <img
             className=" w-80 md:w-[300px] mx-auto"
-            src="https://pictcsi.com/assets/bgCSILogo-a8e0ce5f.png"
+            src="https://www.vdm.ford.com/content/dam/na/ford/en_us/images/mustang/2025/jellybeans/Ford_Mustang_2025_200A_PJS_883_89W_13B_COU_64F_99H_44U_EBST_YZTAC_DEFAULT_EXT_4.png"
             alt="pict logo"
           ></img>
         </div>
