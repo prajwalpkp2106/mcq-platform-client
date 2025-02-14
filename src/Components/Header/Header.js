@@ -16,7 +16,7 @@ const Header = (props) => {
   return (
     <div
       className={
-        "relative shadow-lg flex flex-wrap items-center justify-between px-2 py-3 z-50 text-white bg-black/40"
+        "relative shadow-lg flex flex-wrap items-center justify-between px-2 py-3 z-50 text-white bg-black/80"
       }
     >
       <div className="container px-4 mx-auto flex flex-wrap items-center justify-between text-white">

@@ -16,6 +16,7 @@ const Contest = (props) => {
       .then((res) => {
         const response = res.data;
         if (response.success) {
+          console.log(response.data);
           setData(response.data);
           setLoading(false);
           

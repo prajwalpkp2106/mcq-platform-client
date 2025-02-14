@@ -44,19 +44,19 @@ function ContestCards({ contest, ...props }) {
       <Card
         title={
           <div className="space-y-4">
-            <div className="w-full">
+            {/* <div className="w-full">
               <img
                 className="h-[150px] mx-auto my-2"
                 alt="contest logo"
                 src={contest.logo}
               ></img>
-            </div>
-            <div className=" font-bolds tracking-wider text-lg">
+            </div> */}
+            <div className="font-bolds tracking-wider text-lg">
               {contest.title}
             </div>
           </div>
         }
-        className=" w-80 md:w-[400px] bg-white inline-block text-black mx-auto border-none shadow-cyan-300 min-h-[400px] hover:shadow-lg transition"
+        className=" p-4 w-80 md:w-[400px] bg-white inline-block text-black mx-auto border-none shadow-cyan-300 min-h-[300px] hover:shadow-lg transition "
       >
         <div className="space-y-2 text-gray-500">
           <div className="flex justify-between">
