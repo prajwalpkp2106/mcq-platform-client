@@ -1,9 +1,7 @@
 import axios from "axios";
 
 const backend = axios.create({
-  // baseURL: process.env.backendurl || "https://mcq-platform-server-production.up.railway.app/api",
-  baseURL: "https://mcq-platform-server.onrender.com/api",
-  // baseURL: `http://localhost:4000/api`,
+  baseURL: process.env.REACT_APP_BACKEND_URL || `http://localhost:4000/api`,
 });
 
 export const login = (data) => {
